@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""  Ridin’ Bareback """
+
+
 def mat_mul(mat1, mat2):
     "function that performs matrix multiplication"
     if len(mat1[0]) != len(mat2):
