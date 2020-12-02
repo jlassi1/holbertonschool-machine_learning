@@ -7,3 +7,4 @@ def matrix_shape(matrix):
         shape.append(len(tmp[0]))
         tmp = tmp[0]
     return shape
+    
