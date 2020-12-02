@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""  Gettin’ Cozy"""
+
+
 def cat_matrices2D(mat1, mat2, axis=0):
     "function that concatenates two matrices along a specific axis"
     mat = None
@@ -11,4 +14,3 @@ def cat_matrices2D(mat1, mat2, axis=0):
             return None
         mat = [x + y for x, y in zip(mat1, mat2)]
     return mat
-
