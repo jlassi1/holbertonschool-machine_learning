@@ -3,8 +3,22 @@
 import numpy as np
 
 
+def matrix_shape(matrix):
+    "matrix shape"
+    shape = [len(matrix)]
+    tmp = matrix
+    while isinstance(tmp[0], list):
+        shape.append(len(tmp[0]))
+        tmp = tmp[0]
+    return shape
+
+
 def add_matrices(mat1, mat2):
     """ function that add two matrices"""
-    if np.shape(mat1) != np.shape(mat2):
+    if matrix_shape(mat1) != matrix_shape(mat2):
         return None
-    return np.add(mat1, mat2)
+    if isinstance(mat1[0], int):
+        return mat1 + mat2
+    result = [[mat1[i][j] + mat2[i][j] for j in range
+               (len(mat1[0]))] for i in range(len(mat1))]
+    return result
