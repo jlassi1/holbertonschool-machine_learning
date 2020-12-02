@@ -4,5 +4,5 @@
 
 def matrix_transpose(matrix):
     "matix transpose"
-    mtx = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))] 
+    mtx = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
     return mtx
