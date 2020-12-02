@@ -3,7 +3,7 @@
 
 
 def np_elementwise(mat1, mat2):
-    "function that performs element-wise addition, subtraction, multiplication, and division"
+    """ function that performs element-wise addition, subtraction, multiplication, and division """
     add = mat1 + mat2
     sub = mat1 - mat2
     mul = mat1 * mat2
