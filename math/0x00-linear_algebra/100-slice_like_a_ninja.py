@@ -6,5 +6,5 @@ def np_slice(matrix, axes={}):
     """ function that slices a matrix along specific axes """
     slider = []
     for m in range(len(matrix.shape)):
-        slider.append(slice(*axes.get(m, None)))
+        slider.append(slice(*axes.get(m, (None, None))))
     return matrix[tuple(slider)]
