@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ 16. The Whole Barn """
-import numpy as np
 
 
 def matrix_shape(matrix):
@@ -18,12 +17,6 @@ def add_matrices(mat1, mat2):
     if matrix_shape(mat1) != matrix_shape(mat2):
         return None
     if isinstance(mat1[0], int):
-        mat = []
-        if len(mat1) == len(mat2):
-            for i in range(len(mat1)):
-                mat.append(mat1[i] + mat2[i])
-            return mat
-        return None
-    result = [[mat1[i][j] + mat2[i][j] for j in range
-               (len(mat1[0]))] for i in range(len(mat1))]
-    return result
+        return [mat1[i] + mat2[i] for i in range(len(mat1))]
+    else:
+        return [add_matrices(mat1[i], mat2[i]) for i in range(len(mat1))]
