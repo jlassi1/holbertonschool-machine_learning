@@ -28,6 +28,7 @@ student_grades = np.random.normal(68, 15, 50)
 # your code here
 
 fig = plt.figure()
+fig.tight_layout(pad=10)
 
 fig.suptitle('All in one')
 
@@ -75,4 +76,6 @@ plt.xlabel('Grades', fontsize='x-small')
 plt.ylabel('Number of Students', fontsize='x-small')
 plt.title('Project A', fontsize='x-small')
 
+
+plt.subplots_adjust(wspace=0.30, hspace=.8)
 plt.show()
