@@ -15,4 +15,6 @@ def poly_integral(poly, C=0):
             new_poly.append(coeff // (idx + 1))
         else:
             new_poly.append(coeff / (idx + 1))
+    if all(x == 0 for x in new_poly):
+        return [0]
     return new_poly
