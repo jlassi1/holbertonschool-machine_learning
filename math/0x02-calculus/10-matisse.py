@@ -5,10 +5,9 @@
 def poly_derivative(poly):
     """function that calculates the derivative of a polynomial"""
     if not isinstance(poly, list) or not all(
-            isinstance(x, (
-                    int, float)) for x in poly) or poly is None or poly == []:
+            isinstance(x, (int, float)) for x in poly) or poly is (None or []):
         return None
-    if len(poly) == 1:
+    if len(poly) <= 1:
         return[0]
     new_poly = [coeff * idx for idx, coeff in enumerate(poly[1:], 1)]
     if all(x == 0 for x in new_poly):
