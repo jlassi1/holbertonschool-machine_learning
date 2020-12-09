@@ -11,8 +11,12 @@ def poly_integral(poly, C=0):
         return None
     new_poly = [C]
     for idx, coeff in enumerate(poly):
-        if coeff % (idx + 1) == 0:
-            new_poly.append(coeff // (idx + 1))
-        else:
-            new_poly.append(coeff / (idx + 1))
+        try:
+            coeff / (idx + 1)
+            if coeff % (idx + 1) == 0:
+                new_poly.append(coeff // (idx + 1))
+            else:
+                new_poly.append(coeff / (idx + 1))
+        except:
+            return [0]
     return new_poly
