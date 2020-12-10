@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-""" Sum squared """
+""" summation function """
 
 
 def summation_i_squared(n):
-    """ calculate given sum """
-    if type(n) != int or n < 1:
+    """ function that calculates [\\sum_{i=1}^{n} i^2] """
+    if not isinstance(n, (int, float)) or n < 1:
         return None
     return (n * (n + 1) * (2 * n + 1)) // 6
