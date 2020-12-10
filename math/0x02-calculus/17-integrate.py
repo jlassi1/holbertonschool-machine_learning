@@ -7,7 +7,7 @@ def poly_integral(poly, C=0):
     if not isinstance(poly, list) or not all(isinstance(
             x, (int, float)) for x in poly) or poly == []:
         return None
-    if not isinstance(C, (int, float)) or C is None:
+    if not isinstance(C, (int, float)):
         return None
     new_poly = [C]
     for idx, coeff in enumerate(poly):
