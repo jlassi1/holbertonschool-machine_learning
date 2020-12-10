@@ -9,12 +9,15 @@ def poly_integral(poly, C=0):
         return None
     if not isinstance(C, (int, float)) or C is None:
         return None
-    if isinstance(C, float) and C.is_integer():
-        C = int(C)
     new_poly = [C]
     for idx, coeff in enumerate(poly):
         if coeff % (idx + 1) == 0:
             new_poly.append(coeff // (idx + 1))
         else:
             new_poly.append(coeff / (idx + 1))
+    for i in range(len(new_poly) - 1, 0, -1):
+        if new_poly[i] == 0:
+            new_poly = new_poly[:-1]
+        else:
+            break
     return new_poly
