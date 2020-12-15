@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """ Poisson Distribution"""
+e = 2.7182818285
 
 
 class Poisson:
     """Poisson Class """
-    e = 2.7182818285
 
     def __init__(self, data=None, lambtha=1.):
         """ intitializetion of poisson class """
@@ -25,26 +25,24 @@ class Poisson:
     def pmf(self, k):
         """Calculates the value of the PMF for a given number of “successes”"""
         if not isinstance(k, int):
-            self.k = int(k)
+            k = int(k)
         if k < 0:
             return 0
         factorial = 1
         for i in range(1, k + 1):
             factorial *= i
-        return ((self.e ** (- self.lambtha) * (
-            self.lambtha ** k)) / factorial)
+        return (e ** (- self.lambtha) * (self.lambtha ** k)) / factorial
 
     def cdf(self, k):
         """Calculates the value of the CDF for a given number of “successes”"""
         if not isinstance(k, int):
-            self.k = int(k)
+            k = int(k)
         if k < 0:
             return 0
-        probability = []
+        pmf = []
         for i in range(k + 1):
-            factorial = 1
-            for j in range(2, i + 1):
-                factorial *= j
-            probability.append((self.e ** (- self.lambtha) * (
-                self.lambtha ** i)) / factorial)
-        return sum(probability)
+            fact = 1
+            for j in range(1, i + 1):
+                fact *= j
+            pmf.append((e ** (- self.lambtha) * (self.lambtha ** i)) / fact)
+        return sum(pmf)
