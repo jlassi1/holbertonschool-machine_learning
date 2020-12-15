@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
-""" Initialize Poisson"""
+""" Poisson Distribution"""
 
 class Poisson:
-    """Poisson class """
+    """Poisson Class """
     def __init__(self, data=None, lambtha=1.):
         """ intitializetion of poisson class """
-        self.data = data
-        self.lambtha = lambtha
-        if self.data == None:
-            if self.lambtha < 0:
+        if data == None:
+            if lambtha < 0:
                 raise ValueError("lambtha must be a positive value")
-            return lambtha
+            else:
+                self.lambtha = float(lambtha)
         else:
-            if not isinstance(self.data , list):
+            if not isinstance(data , list):
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             else:
-                self.lambtha = sum(self.data) / len(self.data)
-                return self.lambtha
+                self.lambtha = sum(data) / len(data)
+
