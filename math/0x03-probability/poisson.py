@@ -41,9 +41,9 @@ class Poisson:
         if k < 0:
             return 0
         probability = []
-        for i in range(1, k + 1):
+        for i in range(k + 1):
             factorial = 1
-            for j in range(1, i + 1):
+            for j in range(2, i + 1):
                 factorial *= j
             probability.append((self.e ** (- self.lambtha) * (
                 self.lambtha ** i)) / factorial)
