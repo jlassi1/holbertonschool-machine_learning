@@ -14,7 +14,7 @@ class Binomial:
                 raise ValueError("n must be a positive value")
             else:
                 self.n = int(n)
-            if p < 0 or p > 1:
+            if p <= 0 or p >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
             else:
                 self.p = float(p)
@@ -23,10 +23,11 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            mean = sum(data) / len(data)
+            mean = float(sum(data) / len(data))
             SD = 0
             for x in data:
-                SD += (x - mean) ** 2
-            sqrtstddev = SD / (len(data))
-            self.n = round(mean ** 2 / (mean - sqrtstddev))
+                SD += float((x - mean) ** 2)
+            sqrtstddev = float(SD / (len(data)))
+            self.p = 1 - sqrtstddev / mean
+            self.n = round(mean / self.p)
             self.p = mean / self.n
