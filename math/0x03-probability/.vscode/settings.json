@@ -1,9 +1,0 @@
-{
-    "python.linting.pylintEnabled": true,
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.flake8Enabled": true,
-    "zopeneditor.userbuild.workspaceSettings": {
-    
-    },
-    "python.pythonPath": "C:\\Users\\Khawla\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
-}
