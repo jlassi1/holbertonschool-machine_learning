@@ -23,10 +23,10 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            mean = float(sum(data) / len(data))
+            mean = sum(data) / len(data)
             SD = 0
             for x in data:
-                SD += float((x - mean) ** 2)
-            sqrtstddev = float(SD / (len(data)))
+                SD += (x - mean) ** 2
+            sqrtstddev = SD / (len(data))
             self.n = round(mean ** 2 / (mean - sqrtstddev))
             self.p = mean / self.n
