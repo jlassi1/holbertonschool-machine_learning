@@ -28,6 +28,5 @@ class Binomial:
             for x in data:
                 SD += float((x - mean) ** 2)
             sqrtstddev = float(SD / (len(data)))
-            self.p = 1 - sqrtstddev / mean
-            self.n = round(mean / self.p)
+            self.n = round(mean ** 2 / (mean - sqrtstddev))
             self.p = mean / self.n
