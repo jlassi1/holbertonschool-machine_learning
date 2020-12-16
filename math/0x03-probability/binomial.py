@@ -27,7 +27,23 @@ class Binomial:
             SD = 0
             for x in data:
                 SD += float((x - mean) ** 2)
-            sqrtstddev = float(SD / (len(data)))
-            self.p = 1 - sqrtstddev / mean
+            variance = float(SD / (len(data)))
+            self.p = 1 - variance / mean
             self.n = round(mean / self.p)
             self.p = mean / self.n
+
+    def pmf(self, k):
+        """Calculates the value of the PMF for a given number of “successes”"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
+        x = y = z = 1
+        for i in range(1, self.n + 1):
+            x *= i
+            if i <= k:
+                y *= i
+            if i <= (self.n - k):
+                z *= i
+        c = x / (y * z)
+        return c * (self.p ** k) * ((1 - self.p) ** (self.n - k))
