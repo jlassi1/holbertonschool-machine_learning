@@ -8,7 +8,7 @@ class Normal:
     """Normal Class """
 
     def __init__(self, data=None, mean=0., stddev=1.):
-        """ intitializetion of class Normal"""
+        """ intitialization of class Normal"""
         self.data = data
         if data is None:
             if stddev <= 0:

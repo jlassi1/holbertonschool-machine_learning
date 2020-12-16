@@ -7,7 +7,7 @@ class Poisson:
     """Poisson Class """
 
     def __init__(self, data=None, lambtha=1.):
-        """ intitializetion of poisson class """
+        """ intitialization of poisson class """
         self.data = data
         if data is None:
             if lambtha <= 0:
