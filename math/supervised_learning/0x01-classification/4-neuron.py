@@ -44,3 +44,14 @@ class Neuron:
         cost = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
         total_cost = -(1 / m) * np.sum(cost)
         return total_cost
+
+    def evaluate(self, X, Y):
+        """ Evaluates the neuron’s predictions"""
+        m = Y.shape[1]
+        pred = np.ndarray(shape=(1, m))
+        for i in Y[0]:
+            if i >= 0.5:
+                pred.append(1)
+            else:
+                pred.append(0)
+        return pred, self.cost(Y, X)
