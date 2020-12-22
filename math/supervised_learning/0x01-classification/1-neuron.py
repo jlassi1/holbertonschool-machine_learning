@@ -1,10 +1,11 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 """Create a Neuron """
 import numpy as np
 
 
 class Neuron:
     """defines a single neuron performing binary classification"""
+
     def __init__(self, nx):
         """Class Initialization """
         if not isinstance(nx, int):

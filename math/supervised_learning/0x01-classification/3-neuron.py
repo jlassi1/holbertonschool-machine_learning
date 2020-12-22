@@ -1,10 +1,11 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 """Create a Neuron """
 import numpy as np
 
 
 class Neuron:
     """defines a single neuron performing binary classification"""
+
     def __init__(self, nx):
         """Class Initialization """
         if not isinstance(nx, int):
@@ -30,7 +31,6 @@ class Neuron:
     def b(self):
         """the getter of the bias"""
         return self.__b
-
 
     def forward_prop(self, X):
         """Calculates the forward propagation of the neuron"""
