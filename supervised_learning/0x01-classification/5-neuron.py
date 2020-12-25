@@ -56,6 +56,8 @@ class Neuron:
             else:
                 Y_prediction[0, i] = 0
 
-
-        
         return Y_prediction, self.cost(Y, self.forward_prop(X))
+
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        """Calculates one pass of gradient descent on the neuron"""
+        
