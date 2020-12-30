@@ -34,9 +34,9 @@ class Neuron:
 
     def sigmoid(self, z):
         """ activation function """
-        return 1/(1 + np.exp(-z))
-    
-    def sigmoid_derivative(self,z):
+        return 1 / (1 + np.exp(-z))
+
+    def sigmoid_derivative(self, z):
         """ derivative of activation function"""
         return self.sigmoid(z) * (1 - self.sigmoid(z))
 

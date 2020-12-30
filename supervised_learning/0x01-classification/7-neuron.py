@@ -35,9 +35,9 @@ class Neuron:
 
     def sigmoid(self, z):
         """ activation function """
-        return 1/(1 + np.exp(-z))
-    
-    def sigmoid_derivative(self,z):
+        return 1 / (1 + np.exp(-z))
+
+    def sigmoid_derivative(self, z):
         """ derivative of activation function"""
         return self.sigmoid(z) * (1 - self.sigmoid(z))
 
@@ -71,7 +71,15 @@ class Neuron:
         self.__b = self.__b - alpha * db
         return self.__W, self.__b
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+    def train(
+            self,
+            X,
+            Y,
+            iterations=5000,
+            alpha=0.05,
+            verbose=True,
+            graph=True,
+            step=100):
         """Trains the neuron"""
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
