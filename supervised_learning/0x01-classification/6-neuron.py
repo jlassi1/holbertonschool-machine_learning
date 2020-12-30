@@ -52,3 +52,35 @@ class Neuron:
         cost = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
         C = -(1 / m) * np.sum(cost)
         return C
+
+    def evaluate(self, X, Y):
+        """ Evaluates the neuron’s predictions"""
+        A = self.forward_prop(X)
+        Y_prediction = np.where(A < 0.5, 0, 1)
+        return Y_prediction, self.cost(Y, A)
+
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        """Calculates one pass of gradient descent on the neuron"""
+        m = X.shape[1]
+
+        dW = np.dot((A - Y), X.T) / m
+        self.__W = self.__W - alpha * dW
+
+        db = np.sum((A - Y)) / m
+        self.__b = self.__b - alpha * db
+        return self.__W, self.__b
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """Trains the neuron"""
+        if not isinstance(iterations, int):
+            raise TypeError("iterations must be an integer")
+        if iterations < 0:
+            raise ValueError("iterations must be a positive integer")
+        if not isinstance(alpha, float):
+            raise TypeError("alpha must be a float")
+        if alpha < 0:
+            raise ValueError("alpha must be positive")
+        for iteration in range(iterations):
+            self.__A = self.forward_prop(X)
+            self.gradient_descent(X, Y, self.__A, alpha)
+        return self.evaluate(X, Y)

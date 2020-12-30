@@ -32,30 +32,29 @@ class Neuron:
         """the getter of the bias"""
         return self.__b
 
+    def sigmoid(self, z):
+        """ activation function """
+        return 1/(1 + np.exp(-z))
+    
+    def sigmoid_derivative(self,z):
+        """ derivative of activation function"""
+        return self.sigmoid(z) * (1 - self.sigmoid(z))
+
     def forward_prop(self, X):
         """the forward propagation of the neuron"""
         z = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / (1 + np.exp(- z))
+        self.__A = self.sigmoid(z)
         return self.__A
 
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
         m = A.shape[1]
         cost = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
-        total_cost = -(1 / m) * np.sum(cost)
-        return total_cost
+        C = -(1 / m) * np.sum(cost)
+        return C
 
     def evaluate(self, X, Y):
         """ Evaluates the neuron’s predictions"""
-        m = X.shape[1]
-        Y_prediction = np.zeros((1,m), dtype=int)
-        
-        for i in range(Y.shape[1]):
-            if X[0, i] >= 0.5:
-                Y_prediction[0, i] = 1
-            else:
-                Y_prediction[0, i] = 0
-
-
-        
-        return Y_prediction, self.cost(Y, self.forward_prop(X))
+        A = self.forward_prop(X)
+        Y_prediction = np.where(A < 0.5, 0, 1)
+        return Y_prediction, self.cost(Y, A)

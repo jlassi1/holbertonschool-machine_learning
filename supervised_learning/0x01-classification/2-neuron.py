@@ -32,8 +32,16 @@ class Neuron:
         """the getter of the bias"""
         return self.__b
 
+    def sigmoid(self, z):
+        """ activation function """
+        return 1/(1 + np.exp(-z))
+    
+    def sigmoid_derivative(self,z):
+        """ derivative of activation function"""
+        return self.sigmoid(z) * (1 - self.sigmoid(z))
+
     def forward_prop(self, X):
         """the forward propagation of the neuron"""
         z = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / (1 + np.exp(- z))
+        self.__A = self.sigmoid(z)
         return self.__A
