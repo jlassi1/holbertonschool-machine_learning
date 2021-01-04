@@ -60,7 +60,7 @@ class NeuralNetwork:
 
     def sigmoid_derivative(self, z):
         """ derivative of activation function"""
-        return self.sigmoid(z) * (1 - self.sigmoid(z))
+        return z * (1 - z)
 
     def forward_prop(self, X):
         """the forward propagation of the neuron"""
@@ -86,17 +86,19 @@ class NeuralNetwork:
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network"""
         m = X.shape[1]
+        dz2 = A2 - Y
+        dz1 = np.dot(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
 
-        dW1 = np.dot((A1 - Y), X.T) / m
+        dW1 = np.dot(dz1, X.T) / m
         self.__W1 = self.__W1 - alpha * dW1
 
-        dW2 = np.dot((A2 - Y), A1.T) / m
+        dW2 = np.dot(dz2, A1.T) / m
         self.__W2 = self.__W2 - alpha * dW2
 
-        db1 = np.sum((A1 - Y)) / m
+        db1 = np.sum(dz1, axis=1, keepdims=True) / m
         self.__b1 = self.__b1 - alpha * db1
 
-        db2 = np.sum((A2 - Y)) / m
+        db2 = np.sum(dz2, axis=1, keepdims=True) / m
         self.__b2 = self.__b2 - alpha * db2
 
         return self.__W1, self.__b1, self.__W2, self.__b2
