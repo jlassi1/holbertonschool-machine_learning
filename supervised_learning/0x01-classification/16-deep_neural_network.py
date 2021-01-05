@@ -15,7 +15,7 @@ class DeepNeuralNetwork:
             raise ValueError("nx must be a positive integer")
         if not isinstance(layers, list) or layers == []:
             raise TypeError("layers must be a list of positive integers")
-        if  all([x <= 0 for x in layers]):
+        if  all(x <= 0 for x in layers):
             raise ValueError("layers must be a list of positive integers")
         self.layers = layers
         self.L = len(layers)
