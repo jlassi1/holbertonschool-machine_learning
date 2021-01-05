@@ -18,7 +18,7 @@ class DeepNeuralNetwork:
         elif all([x <= 0 for x in layers]):
             raise ValueError("layers must be a list of positive integers")
         self.layers = layers
-        self.L = len(layers)
+        self.L = len(layers) - 1
         self.cache = {}
         weights = {}
         for l in range(len(layers)):
