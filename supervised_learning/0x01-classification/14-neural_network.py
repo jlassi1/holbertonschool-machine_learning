@@ -8,7 +8,7 @@ class NeuralNetwork:
     hidden layer performing binary classification"""
 
     def __init__(self, nx, nodes):
-        """Class Initialization """
+        """Class Initialization"""
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
         elif nx < 1:
@@ -17,11 +17,12 @@ class NeuralNetwork:
             raise TypeError("nodes must be an integer")
         elif nodes < 1:
             raise ValueError("nodes must be a positive integer")
+        self.nodes = nodes
         self.nx = nx
-        self.__W1 = np.random.randn(3, self.nx)
+        self.__W1 = np.random.randn(self.nodes, self.nx)
         self.__A1 = 0
-        self.__b1 = np.zeros((len(self.W1), 1))
-        self.__W2 = np.random.randn(1, len(self.W1))
+        self.__b1 = np.zeros((self.nodes, 1))
+        self.__W2 = np.random.randn(1, self.nodes)
         self.__A2 = 0
         self.__b2 = 0
 
@@ -85,15 +86,15 @@ class NeuralNetwork:
         return Y_prediction, self.cost(Y, A2)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """Calculates one pass of gradient descent on the neural network"""
+        """Calculates one pass of gradient descent on the neural network """
         m = X.shape[1]
         dz2 = A2 - Y
-        dz1 = np.dot(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
+        dz1 = np.matmul(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
 
-        dW1 = np.dot(dz1, X.T) / m
+        dW1 = np.matmul(dz1, X.T) / m
         self.__W1 = self.__W1 - alpha * dW1
 
-        dW2 = np.dot(dz2, A1.T) / m
+        dW2 = np.matmul(dz2, A1.T) / m
         self.__W2 = self.__W2 - alpha * dW2
 
         db1 = np.sum(dz1, axis=1, keepdims=True) / m
@@ -101,8 +102,6 @@ class NeuralNetwork:
 
         db2 = np.sum(dz2, axis=1, keepdims=True) / m
         self.__b2 = self.__b2 - alpha * db2
-
-        return self.__W1, self.__b1, self.__W2, self.__b2
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """ Trains the neural network """
