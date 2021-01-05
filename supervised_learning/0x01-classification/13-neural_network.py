@@ -20,8 +20,8 @@ class NeuralNetwork:
         self.nx = nx
         self.__W1 = np.random.randn(3, self.nx)
         self.__A1 = 0
-        self.__b1 = np.zeros((len(self.W1), 1))
-        self.__W2 = np.random.randn(1, len(self.W1))
+        self.__b1 = np.zeros((nodes, 1))
+        self.__W2 = np.random.randn(1, nodes)
         self.__A2 = 0
         self.__b2 = 0
 
