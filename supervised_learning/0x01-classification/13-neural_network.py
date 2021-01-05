@@ -8,7 +8,7 @@ class NeuralNetwork:
     hidden layer performing binary classification"""
 
     def __init__(self, nx, nodes):
-        """Class Initialization """
+        """Class Initialization"""
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
         elif nx < 1:
@@ -17,11 +17,12 @@ class NeuralNetwork:
             raise TypeError("nodes must be an integer")
         elif nodes < 1:
             raise ValueError("nodes must be a positive integer")
+        self.nodes = nodes
         self.nx = nx
-        self.__W1 = np.random.randn(3, self.nx)
+        self.__W1 = np.random.randn(self.nodes, self.nx)
         self.__A1 = 0
-        self.__b1 = np.zeros((nodes, 1))
-        self.__W2 = np.random.randn(1, nodes)
+        self.__b1 = np.zeros((self.nodes, 1))
+        self.__W2 = np.random.randn(1, self.nodes)
         self.__A2 = 0
         self.__b2 = 0
 
@@ -59,6 +60,10 @@ class NeuralNetwork:
         """ activation function """
         return 1 / (1 + np.exp(-z))
 
+    def sigmoid_derivative(self, z):
+        """ derivative of activation function"""
+        return z * (1 - z)
+
     def forward_prop(self, X):
         """the forward propagation of the neuron"""
         z1 = np.dot(self.__W1, X) + self.__b1
@@ -70,23 +75,21 @@ class NeuralNetwork:
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression"""
         m = A.shape[1]
-        C = 0
         cost = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
         C = -(1 / m) * np.sum(cost)
         return C
 
     def evaluate(self, X, Y):
         """Evaluates the neural network’s predictions"""
-        self.forward_prop(X)
-        Y_prediction = np.where(self.__A2 < 0.5, 0, 1)
-        return Y_prediction, self.cost(Y, self.__A2)
+        A1, A2 = self.forward_prop(X)
+        Y_prediction = np.where(A2 < 0.5, 0, 1)
+        return Y_prediction, self.cost(Y, A2)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network """
         m = X.shape[1]
         dz2 = A2 - Y
-        dev_sigmoid = A1 * (1 - A1)
-        dz1 = np.matmul(self.__W2.T, dz2) * dev_sigmoid
+        dz1 = np.matmul(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
 
         dW1 = np.matmul(dz1, X.T) / m
         self.__W1 = self.__W1 - alpha * dW1
@@ -99,4 +102,3 @@ class NeuralNetwork:
 
         db2 = np.sum(dz2, axis=1, keepdims=True) / m
         self.__b2 = self.__b2 - alpha * db2
-
