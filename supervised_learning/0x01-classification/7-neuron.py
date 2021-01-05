@@ -93,7 +93,7 @@ class Neuron:
             if not isinstance(step, int):
                 raise TypeError("step must be an integer")
             if step <= 0 or step > iterations:
-                raise ValueError("tep must be positive and <= iterations")
+                raise ValueError("step must be positive and <= iterations")
         cost = []
         iter = []
         for iteration in range(iterations + 1):
