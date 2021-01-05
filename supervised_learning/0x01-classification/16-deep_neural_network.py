@@ -11,9 +11,9 @@ class DeepNeuralNetwork:
         """ Class Initialization """
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
-        if nx < 1:
+        if nx <= 1:
             raise ValueError("nx must be a positive integer")
-        if not isinstance(layers, list) or layers == []:
+        if not isinstance(layers, list) or layers == [] or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
         if not isinstance(all(layers), int) or not (all(layers) >= 0):
             raise ValueError("layers must be a list of positive integers")
