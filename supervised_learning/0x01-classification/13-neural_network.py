@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """second class"""
 import numpy as np
 
