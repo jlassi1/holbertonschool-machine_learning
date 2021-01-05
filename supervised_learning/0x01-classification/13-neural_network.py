@@ -84,7 +84,7 @@ class NeuralNetwork:
         return Y_prediction, self.cost(Y, A2)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """Calculates one pass of gradient descent on the neural network"""
+        """Calculates one pass of gradient descent on the neural network """
         m = X.shape[1]
         dz2 = A2 - Y
         dz1 = np.dot(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
