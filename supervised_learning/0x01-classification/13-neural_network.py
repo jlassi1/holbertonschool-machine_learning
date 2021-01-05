@@ -80,9 +80,9 @@ class NeuralNetwork:
 
     def evaluate(self, X, Y):
         """Evaluates the neural network’s predictions"""
-        A1, A2 = self.forward_prop(X)
-        Y_prediction = np.where(A2 < 0.5, 0, 1)
-        return Y_prediction, self.cost(Y, A2)
+        self.forward_prop(X)
+        Y_prediction = np.where(self.__A2 < 0.5, 0, 1)
+        return Y_prediction, self.cost(Y, self.__A2)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network """
