@@ -61,7 +61,7 @@ class DeepNeuralNetwork:
         """Calculates the forward propagation of the neural network"""
         self.__cache["A0"] = X
         for j in range(self.__L):
-            s = np.matmul(self.__weights["W" + str(j+1)], self.__cache[
+            s = np.dot(self.__weights["W" + str(j+1)], self.__cache[
                 "A" + str(j)]) + (self.__weights["b" + str(j+1)])
             self.__cache["A" + str(j+1)] = self.sigmoid(s)
         return self.__cache["A" + str(self.__L)], self.__cache
