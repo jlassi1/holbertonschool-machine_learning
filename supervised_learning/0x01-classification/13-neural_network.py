@@ -88,12 +88,12 @@ class NeuralNetwork:
         """Calculates one pass of gradient descent on the neural network """
         m = X.shape[1]
         dz2 = A2 - Y
-        dz1 = np.dot(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
+        dz1 = np.matmul(self.__W2.T, dz2) * self.sigmoid_derivative(A1)
 
-        dW1 = np.dot(dz1, X.T) / m
+        dW1 = np.matmul(dz1, X.T) / m
         self.__W1 = self.__W1 - alpha * dW1
 
-        dW2 = np.dot(dz2, A1.T) / m
+        dW2 = np.matmul(dz2, A1.T) / m
         self.__W2 = self.__W2 - alpha * dW2
 
         db1 = np.sum(dz1, axis=1, keepdims=True) / m
