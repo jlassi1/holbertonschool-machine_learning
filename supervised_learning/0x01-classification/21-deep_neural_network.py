@@ -85,13 +85,13 @@ class DeepNeuralNetwork:
         j = self.__L
         dZ = cache["A" + str(self.__L)] - Y
         while j > 0:
-            A = self.__cache["A" + str(j-1)]
-            dW = np.matmul(dZ, A.T) / m
+            Act = self.__cache["A" + str(j-1)]
+            dW = np.matmul(dZ, Act.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
 
             self.__weights["W"+str(j)] -= alpha * dW
             self.__weights["b"+str(j)] -= alpha * db
 
             dZ = np.matmul(self.__weights[
-                "W"+str(j)].T, dZ) * self.sigmoid_derivative(A)
+                "W"+str(j)].T, dZ) * self.sigmoid_derivative(Act)
             j -= 1
