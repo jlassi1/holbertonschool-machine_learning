@@ -87,9 +87,8 @@ class DeepNeuralNetwork:
             Act = cache["A" + str(j-1)]
             dW = np.matmul(dZ, Act.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
+            dZ = np.matmul(self.__weights[
+                "W" + str(j)].T, dZ) * self.sigmoid_derivative(Act)
 
             self.__weights["W" + str(j)] -= alpha * dW
             self.__weights["b" + str(j)] -= alpha * db
-
-            dZ = np.matmul(self.__weights[
-                "W" + str(j)].T, dZ) * self.sigmoid_derivative(Act)
