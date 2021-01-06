@@ -82,9 +82,8 @@ class DeepNeuralNetwork:
     def gradient_descent(self, Y, cache, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network"""
         m = len(Y[0])
-        j = self.__L
         dZ = cache["A" + str(self.__L)] - Y
-        while j > 0:
+        for j in range(self.L, 0, -1):
             A = cache["A" + str(j-1)]
             dW = np.matmul(dZ, A.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
@@ -94,4 +93,3 @@ class DeepNeuralNetwork:
 
             dZ = np.matmul(self.__weights[
                 "W"+str(j)].T, dZ) * self.sigmoid_derivative(A)
-            j -= 1
