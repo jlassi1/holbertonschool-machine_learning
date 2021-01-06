@@ -90,6 +90,6 @@ class DeepNeuralNetwork:
 
             self.__weights["W"+str(j)] -= alpha * dW
             self.__weights["b"+str(j)] -= alpha * db
-
+            dsigmoid = A * (1-A)
             dZ = np.matmul(self.__weights[
-                "W"+str(j)].T, dZ) * self.sigmoid_derivative(A)
+                "W"+str(j)].T, dZ) * dsigmoid
