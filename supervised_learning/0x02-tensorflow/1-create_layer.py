@@ -7,7 +7,8 @@ def create_layer(prev, n, activation):
     """ function that create layers """
     kernel_init = tf.contrib.layers.variance_scaling_initializer(
         mode="FAN_AVG")
-    layer = tf.layers.dense(prev, units=n, activation=activation,
+
+    layer = tf.layers.Dense(units=n, activation=activation,
                             kernel_initializer=kernel_init, name="layer",
                             )
-    return layer
+    return layer(prev)
