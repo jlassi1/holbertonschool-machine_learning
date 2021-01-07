@@ -7,8 +7,6 @@ def one_hot_encode(Y, classes):
     """function that converts a numeric
     label vector into a one-hot matrix"""
     try:
-        b = np.zeros((classes, Y.max()+1))
-        b[np.arange(classes), Y] = 1
-        return b.T
+        return np.squeeze(np.eye(classes)[Y.reshape(-1)]).T
     except Exception:
         return None
