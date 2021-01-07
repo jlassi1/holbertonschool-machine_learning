@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """  Accuracy  """
 import tensorflow as tf
-create_layer = __import__('1-create_layer').create_layer
 
 
 def calculate_accuracy(y, y_pred):
