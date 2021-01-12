@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" 1. Normalize"""
 import numpy as np
 
 

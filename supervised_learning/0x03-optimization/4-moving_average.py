@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""4. Moving Average """
 import numpy as np
 
 
