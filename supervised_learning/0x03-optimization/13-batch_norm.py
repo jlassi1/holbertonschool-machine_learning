@@ -8,6 +8,6 @@ def batch_norm(Z, gamma, beta, epsilon):
     a neural network using batch normalization"""
     m = np.mean(Z, axis=0)
     s = np.std(Z, axis=0)
-    Z_norm = (Z - m) / s
+    Z_norm = (Z - m) / np.sqrt(s**2 + epsilon)
     Z_ = gamma*Z_norm+beta
     return Z_
