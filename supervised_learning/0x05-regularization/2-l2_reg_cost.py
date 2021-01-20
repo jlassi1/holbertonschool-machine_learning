@@ -8,4 +8,5 @@ def l2_reg_cost(cost):
     function that calculates the cost
     of a neural network with L2 regularization
     """
-    return tf.losses.get_regularization_losses() + cost
+    loss = cost + tf.losses.get_regularization_loss()
+    return loss
