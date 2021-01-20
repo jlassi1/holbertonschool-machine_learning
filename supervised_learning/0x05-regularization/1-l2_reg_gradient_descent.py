@@ -19,7 +19,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             "W" + str(j)].T, dZ) * np.tanh(Act)
 
         dW_L2reg = dW + (lambtha/m)*weights["W" + str(j)]
-        db_L2reg = db + (lambtha/m)*weights["b" + str(j)]
+        #db_L2reg = db + (lambtha/m)*weights["b" + str(j)]
 
         weights["W" + str(j)] -= alpha * dW_L2reg
-        weights["b" + str(j)] -= alpha * db_L2reg
+        weights["b" + str(j)] -= alpha * db
