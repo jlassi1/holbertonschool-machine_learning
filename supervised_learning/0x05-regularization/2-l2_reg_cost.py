@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """ 2. L2 Regularization Cost """
+
+
 import tensorflow as tf
 
 
