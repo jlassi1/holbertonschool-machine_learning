@@ -14,9 +14,9 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
         Act = cache["A" + str(j-1)]
         dW = np.matmul(dZ, Act.T) / m
         db = np.sum(dZ, axis=1, keepdims=True) / m
-
+        tanh = 1 - Act*Act
         dZ = np.matmul(weights[
-            "W" + str(j)].T, dZ) * np.tanh(Act)
+            "W" + str(j)].T, dZ) * tanh
 
         if j > 1:
             dZ *= cache["D"+str(j - 1)]
