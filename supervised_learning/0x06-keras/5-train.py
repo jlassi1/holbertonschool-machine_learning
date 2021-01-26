@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ 5. Train """
-from tensorflow import keras as K
+import tensorflow.keras as K
 
 
 def train_model(network,
