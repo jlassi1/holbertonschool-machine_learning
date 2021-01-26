@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 9. Save and Load Model """
+""" 10. Save and Load Weights """
 import tensorflow.keras as K
 
 
