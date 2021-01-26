@@ -6,8 +6,10 @@ import tensorflow.keras as K
 def train_model(network, data, labels,
                 batch_size, epochs, validation_data=None,
                 early_stopping=False, patience=0,
-                verbose=True, shuffle=False):
-    """ early stooping """
+                learning_rate_decay=False, alpha=0.1,
+                decay_rate=1, verbose=True, shuffle=False):
+    """ Learning Rate Decay """
+    callback = None
     if early_stopping and validation_data:
         callback = K.callbacks.EarlyStopping(monitor='loss', patience=patience)
     history = network.fit(x=data, y=labels, callbacks=[callback],
