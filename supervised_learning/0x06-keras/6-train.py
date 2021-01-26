@@ -10,8 +10,9 @@ def train_model(network, data, labels,
                 decay_rate=1, verbose=True, shuffle=False):
     """ Learning Rate Decay """
     callback = None
-    if early_stopping:
+    if early_stopping or validation_data:
         callback = K.callbacks.EarlyStopping(patience=patience)
+    if 
     history = network.fit(x=data, y=labels, callbacks=[callback],
                           epochs=epochs, batch_size=batch_size,
                           validation_data=validation_data,
