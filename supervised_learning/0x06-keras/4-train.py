@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 4. Train """
+""" kerass """
 import tensorflow.keras as K
 
 
@@ -10,7 +10,7 @@ def train_model(network,
                 epochs,
                 verbose=True,
                 shuffle=False):
-    """function that trains a model using mini-batch gradient descent"""
+    """function that trains a model """
     history = network.fit(
         x=data,
         y=labels,
