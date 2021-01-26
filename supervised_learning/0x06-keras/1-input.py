@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """ 1. Input """
-from tensorflow import keras as K
+import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
     """function that builds a neural network with the Keras library"""
-    l2 = K.regularizers.l2(l=lambtha)
+    l2 = K.regularizers.l2(lambtha)
     inputs = K.Input(shape=(nx,))
     x = inputs
     for i in range(len(layers)):
