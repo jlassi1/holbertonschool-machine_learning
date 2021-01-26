@@ -12,6 +12,7 @@ def train_model(network,
                 verbose=True,
                 shuffle=False):
     """function that trains a model using mini-batch gradient descent"""
-    return network.fit(data, labels, nb_epoch=epochs,
+    history = network.fit(data, labels, nb_epoch=epochs,
                        batch_size=batch_size, validation_data=validation_data,
                        verbose=verbose, shuffle=shuffle)
+    return history
