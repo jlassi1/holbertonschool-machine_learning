@@ -3,9 +3,7 @@
 import numpy as np
 
 
-def conv_forward(A_prev, W, b,
-                 activation, padding="same",
-                 stride=(1, 1)):
+def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     """function  that performs forward propagation
     over a convolutional layer of a neural network"""
     m, h, w, c = A_prev.shape
@@ -15,8 +13,8 @@ def conv_forward(A_prev, W, b,
     if padding == 'valid':
         ph, pw = 0, 0
     if padding == 'same':
-        ph = int(((h-1)*sh+kh)/2)
-        pw = int(((w-1)*sw+kw)/2)
+        ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
+        pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
     """ output size"""
     nh = int((h-kh+2*ph)/sh + 1)
     nw = int((w-kh+2*pw)/sw + 1)
