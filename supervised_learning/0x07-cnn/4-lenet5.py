@@ -32,8 +32,7 @@ def lenet5(x, y):
                              kernel_initializer=init)(FC2)
 
     # Define a loss function
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
-        labels=y, logits=y_pred))
+    loss = tf.losses.softmax_cross_entropy(y, y_pred)
     # training operation that utilizes Adam optimization
     train_op = tf.train.AdamOptimizer().minimize(loss)
 
