@@ -16,6 +16,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     if padding == 'same':
         ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
+    else:
+        ph, pw = padding
     """ output size"""
     nh = int((h-kh+2*ph)/sh + 1)
     nw = int((w-kh+2*pw)/sw + 1)
@@ -30,6 +32,6 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
             for c in range(cn):
                 pad = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw, :]
                 output[:, x, y, c] = np.sum(
-                    np.multiply(pad, W[:, :, :, c]), axis=(1, 2, 3))
+                    pad*W[:, :, :, c],  axis=(1, 2, 3)) + b[:, :, :, :]
 
-    return activation(output + b)
+    return activation(output)
