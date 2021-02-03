@@ -17,8 +17,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
 
     """ output size"""
-    nh = int(np.floor((h-kh+2*ph)/sh + 1))
-    nw = int(np.floor((w-kh+2*pw)/sw + 1))
+    nh = int((h-kh+2*ph)/sh + 1)
+    nw = int((w-kh+2*pw)/sw + 1)
     output = np.zeros((m, nh, nw, cn))
     """ create a pad layer"""
     pad_lay = np.pad(A_prev, pad_width=((0,), (ph,), (pw,), (0,)),
