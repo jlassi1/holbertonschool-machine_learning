@@ -28,10 +28,9 @@ def lenet5(x, y):
     FC2 = tf.layers.Dense(84, kernel_initializer=init,
                           activation=tf.nn.relu)(FC1)
     # Fully connected softmax output layer with 10 nodes
-    y_ = tf.layers.Dense(10,# activation=tf.nn.softmax,
+    y_pred = tf.layers.Dense(10, activation=tf.nn.softmax,
                              kernel_initializer=init)(FC2)
 
-    y_pred= tf.nn.softmax(y_)
     # Define a loss function
     loss = tf.losses.softmax_cross_entropy(y, y_pred)
     # training operation that utilizes Adam optimization
@@ -39,8 +38,8 @@ def lenet5(x, y):
 
     # predicted accuracy
     correct_prediction = tf.equal(
-        tf.argmax(y, axis=1),
-        tf.argmax(y_pred, axis=1))
+        tf.math..argmax(y, axis=1),
+        tf.math..argmax(y_pred, axis=1))
     acc = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
     return y_pred, train_op, loss, acc
