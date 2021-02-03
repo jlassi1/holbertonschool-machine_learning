@@ -18,7 +18,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
     """ output size"""
     nh = int((h-kh+2*ph)/sh + 1)
-    nw = int((w-kh+2*pw)/sw + 1)
+    nw = int((w-kw+2*pw)/sw + 1)
     output = np.empty((m, nh, nw, cn))
     """ create a pad layer"""
     A = np.pad(A_prev, pad_width=((0,), (ph,), (pw,), (0,)),
