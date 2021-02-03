@@ -17,8 +17,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     if padding == 'same':
         ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
-    # else:
-    #     ph, pw = padding
+    else:
+        ph, pw = padding
 
     """ output size"""
     nh = int(np.floor((h-kh+2*ph)/sh + 1))
