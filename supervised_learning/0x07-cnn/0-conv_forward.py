@@ -1,33 +1,38 @@
 #!/usr/bin/env python3
-""" convolve function """
+"""0. Convolutional Forward Prop"""
 import numpy as np
 
 
 def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
-    """ Function that that performs forward propagation
-        over a convolutional layer of a neural network """
-    m, h, w, c = np.shape(A_prev)
-    kh, kw, c, nc = np.shape(W)
+    """function  that performs forward propagation
+    over a convolutional layer of a neural network"""
+    m, h, w, c = A_prev.shape
+    kh, kw, cp, cn = W.shape
+    # print(cn)
     sh, sw = stride
-    if padding == "valid":
-        ph = 0
-        pw = 0
-    elif padding == "same":
-        ph = int(((h - 1) * sh + kh - kh % 2 - h) / 2) + 1
-        pw = int(((w - 1) * sw + kw - kw % 2 - w) / 2) + 1
+    """ padding condition"""
+    if padding == 'valid':
+        ph, pw = 0, 0
+    if padding == 'same':
+        ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
+        pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
     else:
         ph, pw = padding
-    image = np.zeros((m, (h + 2 * ph), (w + 2 * pw), c))
-    image[:, ph:h+ph, pw:w+pw, :] = A_prev.copy()
-    nh = np.floor(((h + 2 * ph - kh) / stride[0]) + 1).astype(int)
-    nw = np.floor(((w + 2 * pw - kw) / stride[1]) + 1).astype(int)
-    S = np.zeros((m, nh, nw, nc))
-    im = np.arange(0, m)
-    for i in range(nh):
-        for j in range(nw):
-            for k in range(nc):
-                S[im, i, j, k] += np.sum(image[im, sh * i:sh * i + kh,
-                                               sw * j:sw * j + kw, :]
-                                         * W[:, :, :, k],
-                                         axis=(1, 2, 3))
-    return activation(S + b)
+
+    """ output size"""
+    nh = int((h-kh+2*ph)/sh + 1)
+    nw = int((w-kh+2*pw)/sw + 1)
+    output = np.empty((m, nh, nw, cn))
+    """ create a pad layer"""
+    pad_lay = np.pad(A_prev, pad_width=((0,), (ph,), (pw,), (0,)),
+                     mode="constant",
+                     constant_values=0)
+
+    for x in range(nh):
+        for y in range(nw):
+            for c in range(cn):
+                slice_ = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw, :]
+                output[:, x, y, c] += np.sum(
+                    slice_*W[:, :, :, c], axis=(1, 2, 3))
+
+    return activation(output + b)
