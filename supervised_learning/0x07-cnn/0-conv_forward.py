@@ -8,7 +8,6 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     over a convolutional layer of a neural network"""
     m, h, w, c = A_prev.shape
     kh, kw, cp, cn = W.shape
-    # print(c)
     sh, sw = stride
     """ padding condition"""
     if padding == 'valid':
@@ -17,8 +16,6 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     if padding == 'same':
         ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
-    else:
-        ph, pw = padding
 
     """ output size"""
     nh = int(np.floor((h-kh+2*ph)/sh + 1))
@@ -32,8 +29,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     for x in range(nh):
         for y in range(nw):
             for c in range(cn):
-                slice_ = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw, :]
-                output[:, x, y, c] += np.sum(
+                slice_ = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw]
+                output[:, x, y, c] = np.sum(
                     slice_*W[:, :, :, c], axis=(1, 2, 3))
 
     return activation(output + b)
