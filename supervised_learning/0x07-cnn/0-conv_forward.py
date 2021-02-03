@@ -30,7 +30,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
         for y in range(nw):
             for c in range(cn):
                 slice_ = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw, :]
-                output[:, x, y, c] = np.sum(
-                    slice_*W[:, :, :, c], axis=(1, 2, 3)) + b[:, :, :, c]
+                output[:, x, y, c] = activation(np.sum(
+                    slice_*W[:, :, :, c], axis=(1, 2, 3)) + b[:, :, :, c])
 
-    return activation(output)
+    return output
