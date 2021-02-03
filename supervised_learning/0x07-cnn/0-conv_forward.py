@@ -30,6 +30,6 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
             for c in range(cn):
                 pad = pad_lay[:, x*sh:kh+x*sh, y*sw:kw+y*sw, :]
                 output[:, x, y, c] = np.sum(
-                    pad*W[:, :, :, c],  axis=(1, 2, 3))
+                    pad*W[:, :, :, c])
 
     return activation(output + b)
