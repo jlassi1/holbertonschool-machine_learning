@@ -38,8 +38,8 @@ def lenet5(x, y):
 
     # predicted accuracy
     correct_prediction = tf.equal(
-        tf.math..argmax(y, axis=1),
-        tf.math..argmax(y_pred, axis=1))
+        tf.math.argmax(y, axis=1),
+        tf.math.argmax(y_pred, axis=1))
     acc = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
     return y_pred, train_op, loss, acc
