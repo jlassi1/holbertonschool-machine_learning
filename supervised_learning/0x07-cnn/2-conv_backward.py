@@ -11,8 +11,8 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     kh, kw, cp, cn = W.shape
     sh, sw = stride
     """ padding condition"""
-    if padding == 'valid':
-        ph, pw = 0, 0
+    # if padding == 'valid':
+    ph, pw = 0, 0
     if padding == 'same':
         ph = int(np.ceil(((h - 1) * sh + kh - h) / 2))
         pw = int(np.ceil(((w - 1) * sw + kw - w) / 2))
@@ -40,8 +40,10 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                     dA_ += dZ[i, x, y, c]*W[:, :, :, c]
                     dW[:, :, :, c] += A_ * dZ[i, x, y, c]
                     db[:, :, :, c] += dZ[i, x, y, c]
-    if padding == 'same':
-        dA = dA[:, ph:-ph, pw:-pw, :]
-    else:
-        dA = dA
+
+    # dA without padding
+    # if padding == 'same':
+    dA = dA[:, ph:-ph, pw:-pw, :]
+    # else:
+    #    dA = dA
     return dA, dW, db
