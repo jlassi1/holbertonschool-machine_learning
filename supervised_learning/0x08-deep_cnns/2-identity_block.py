@@ -14,21 +14,18 @@ def identity_block(A_prev, filters):
     A_shortcut = A_prev
     # First component of main path
     Z = K.layers.Conv2D(
-        F11, (1, 1), strides=(
-            1, 1), padding='same', kernel_initializer=init)(A_prev)
+        F11, (1, 1), padding='same', kernel_initializer=init)(A_prev)
     Z = K.layers.BatchNormalization(axis=3)(Z)
     Z = K.layers.Activation('relu')(Z)
     # Second component of main path
     Z = K.layers.Conv2D(
         F3, kernel_size=(
-            3, 3), strides=(
-            1, 1), padding='same', kernel_initializer=init)(Z)
+            3, 3), padding='same', kernel_initializer=init)(Z)
     Z = K.layers.BatchNormalization(axis=3)(Z)
     Z = K.layers.Activation('relu')(Z)
     # Third component of main path
     Z = K.layers.Conv2D(
         F12, kernel_size=(
-            1, 1), strides=(
             1, 1), padding='same', kernel_initializer=init)(Z)
     X = K.layers.BatchNormalization(axis=3)(Z)
 
