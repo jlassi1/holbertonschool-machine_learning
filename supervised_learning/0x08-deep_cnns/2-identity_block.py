@@ -13,8 +13,9 @@ def identity_block(A_prev, filters):
     # Save the input value.
     A_shortcut = A_prev
     # First component of main path
-    Z = K.layers.Conv2D(F11, (1, 1), strides=(
-        1, 1), kernel_initializer=init)(A_prev)
+    Z = K.layers.Conv2D(
+        F11, (1, 1), strides=(
+            1, 1), padding='valid', kernel_initializer=init)(A_prev)
     Z = K.layers.BatchNormalization(axis=3)(Z)
     Z = K.layers.Activation('relu')(Z)
     # Second component of main path
