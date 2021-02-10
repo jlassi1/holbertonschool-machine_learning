@@ -15,14 +15,16 @@ def inception_network():
 
     M_pool = K.layers.MaxPool2D((3, 3),
                                 strides=(2, 2), padding='same')(conv_7x7)
+    Norm = K.layers.BatchNormalization()(M_pool)
     conv_3x3_reduce = K.layers.Conv2D(64, (1, 1),
                                       strides=(1, 1), padding='same',
-                                      activation='relu')(M_pool)
+                                      activation='relu')(Norm)
     conv_3x3 = K.layers.Conv2D(192, (3, 3),
                                strides=(1, 1), padding='same',
                                activation='relu')(conv_3x3_reduce)
+    Norm = K.layers.BatchNormalization()(conv_3x3)
     M_pool = K.layers.MaxPool2D((3, 3),
-                                strides=(2, 2), padding='same')(conv_3x3)
+                                strides=(2, 2), padding='same')(Norm)
     a3 = inception_block(M_pool, [64, 96, 128, 16, 32, 32])
     b3 = inception_block(a3, [128, 128, 192, 32, 96, 64])
     M_pool = K.layers.MaxPool2D((3, 3),
