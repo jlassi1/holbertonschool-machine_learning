@@ -15,23 +15,21 @@ def inception_network():
 
     M_pool = K.layers.MaxPool2D((3, 3),
                                 strides=(2, 2), padding='same')(conv_7x7)
-    Norm = K.layers.BatchNormalization()(M_pool)
     conv_3x3_reduce = K.layers.Conv2D(64, (1, 1),
-                                      strides=(1, 1), padding='same',
-                                      activation='relu')(Norm)
+                                      strides=(1, 1), padding='valid',
+                                      activation='relu')(M_pool)
     conv_3x3 = K.layers.Conv2D(192, (3, 3),
                                strides=(1, 1), padding='same',
                                activation='relu')(conv_3x3_reduce)
-    Norm = K.layers.BatchNormalization()(conv_3x3)
     M_pool = K.layers.MaxPool2D((3, 3),
-                                strides=(2, 2), padding='same')(Norm)
+                                strides=(2, 2), padding='same')(conv_3x3)
     a3 = inception_block(M_pool, [64, 96, 128, 16, 32, 32])
     b3 = inception_block(a3, [128, 128, 192, 32, 96, 64])
     M_pool = K.layers.MaxPool2D((3, 3),
                                 strides=(2, 2), padding='same')(b3)
     a4 = inception_block(M_pool, [192, 96, 208, 16, 48, 64])
 
-    x0 = K.layers.AveragePooling2D((5, 5), strides=(3, 3))(a4)
+    x0 = K.layers.AveragePooling2D((5, 5), strides=(3, 3), padding='valid')(a4)
     x0 = K.layers.Conv2D(128, (1, 1), strides=(1, 1),
                          padding="same", activation='relu')(x0)
     x0 = K.layers.Flatten()(x0)
@@ -43,7 +41,7 @@ def inception_network():
     c4 = inception_block(b4, [128, 128, 256, 24, 64, 64])
     d4 = inception_block(c4, [112, 144, 288, 32, 64, 64])
 
-    x1 = K.layers.AveragePooling2D((5, 5), strides=(3, 3))(d4)
+    x1 = K.layers.AveragePooling2D((5, 5), strides=(3, 3), padding='valid')(d4)
     x1 = K.layers.Conv2D(128, (1, 1), strides=(1, 1),
                          padding="same", activation='relu')(x1)
     x1 = K.layers.Flatten()(x1)
@@ -56,7 +54,8 @@ def inception_network():
                                 strides=(2, 2), padding='same')(e4)
     a5 = inception_block(M_pool, [256, 160, 320, 32, 128, 128])
     b5 = inception_block(a5, [384, 192, 384, 48, 128, 128])
-    AVG_pool = K.layers.AveragePooling2D((7, 7), strides=(1, 1))(b5)
+    AVG_pool = K.layers.AveragePooling2D((7, 7), strides=(1, 1),
+                                         padding='valid')(b5)
     dropout = K.layers.Dropout(0.4)(AVG_pool)
     linear = K.layers.Flatten()(dropout)
     Y = K.layers.Dense(1000, activation='softmax')(dropout)
