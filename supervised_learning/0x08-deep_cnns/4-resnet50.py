@@ -10,13 +10,13 @@ def resnet50():
     in Deep Residual Learning for Image Recognition (2015)"""
     # create an input model with shape=(224, 224, 3)
     X = K.Input(shape=(224, 224, 3))
-
+    init = K.initializers.he_normal()
     model50 = K.applications.ResNet50(include_top=False,
                                       input_tensor=X, input_shape=(
                                           224, 224, 3))
     avg = K.layers.AveragePooling2D(pool_size=(7, 7),
                                     strides=(1, 1))(model50.output)
     Y = K.layers.Dense(units=1000, activation='softmax',
-                         )(avg)
+                       kernel_initializer=init)(avg)
     model = K.models.Model(inputs=model50.input, outputs=Y)
     return model
