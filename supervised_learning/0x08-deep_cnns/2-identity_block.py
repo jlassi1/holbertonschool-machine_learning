@@ -9,7 +9,7 @@ def identity_block(A_prev, filters):
     # Retrieve Filters
     F11, F3, F12 = filters
     # initialize weights with he normal
-    init = K.initializers.he_normal()
+    # init = K.initializers.he_normal()
     # Save the input value.
     A_shortcut = A_prev
     # First component of main path
@@ -19,19 +19,19 @@ def identity_block(A_prev, filters):
             1,
             1),
         padding='same',
-        kernel_initializer=init)(A_prev)
+        kernel_initializer='he_normal')(A_prev)
     Z = K.layers.BatchNormalization()(Z)
     Z = K.layers.Activation('relu')(Z)
     # Second component of main path
     Z = K.layers.Conv2D(
         filters=F3, kernel_size=(
-            3, 3), padding='same', kernel_initializer=init)(Z)
+            3, 3), padding='same', kernel_initializer='he_normal')(Z)
     Z = K.layers.BatchNormalization()(Z)
     Z = K.layers.Activation('relu')(Z)
     # Third component of main path
     Z = K.layers.Conv2D(
         filters=F12, kernel_size=(
-            1, 1), padding='same', kernel_initializer=init)(Z)
+            1, 1), padding='same', kernel_initializer='he_normal')(Z)
     X = K.layers.BatchNormalization()(Z)
 
     # Final step: Add shortcut value to main path, and pass it through a RELU
