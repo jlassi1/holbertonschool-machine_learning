@@ -10,20 +10,13 @@ def resnet50():
     in Deep Residual Learning for Image Recognition (2015)"""
     # create an input model with shape=(224, 224, 3)
     X = K.Input(shape=(224, 224, 3))
-    # init = K.initializers.he_normal()
-    # Z = K.layers.Conv2D(filters=64, kernel_size=(7, 7),
-    #                          padding='same',
-    #                          strides=(2, 2),
-    #                          kernel_initializer=he_init)(X)
-    # Z = K.layers.BatchNormalization(axis=3)(Z)
-    # Z = K.layers.Activation('relu')(Z)
-    # Z = K.layers.MaxPooling2D(pool_size=(3, 3),
-    #                                strides=(2, 2),
-    #                                padding="same")(Z)
 
-    # Z = projection_block(Z, [64, 64, 256], 1)
-    # Z = identity_block(Z, [64, 64, 256])
-    # Z = identity_block(Z, [64, 64, 256])
-    return K.applications.ResNet50(weights=None,
-                                   input_tensor=X, input_shape=(
-                                       224, 224, 3), pooling='max')
+    model50 = K.applications.ResNet50(include_top=False,
+                                      input_tensor=X, input_shape=(
+                                          224, 224, 3))
+    avg = K.layers.AveragePooling2D(pool_size=(7, 7),
+                                    strides=(1, 1))(model50.output)
+    Y = K.layers.Dense(units=1000, activation='softmax',
+                         )(avg)
+    model = K.models.Model(inputs=model50.input, outputs=Y)
+    return model
