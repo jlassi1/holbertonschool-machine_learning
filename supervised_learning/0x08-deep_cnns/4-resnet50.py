@@ -25,5 +25,5 @@ def resnet50():
     # Z = identity_block(Z, [64, 64, 256])
     # Z = identity_block(Z, [64, 64, 256])
     return K.applications.ResNet50(weights=None,
-        input_tensor=X, input_shape=(
-            224, 224, 3), pooling='max')
+                                   input_tensor=X, input_shape=(
+                                       224, 224, 3), pooling='max')
