@@ -10,7 +10,7 @@ def resnet50():
     in Deep Residual Learning for Image Recognition (2015)"""
     # create an input model with shape=(224, 224, 3)
     X = K.Input(shape=(224, 224, 3))
-    # he_init = K.initializers.he_normal()
+    init = K.initializers.he_normal()
     # Z = K.layers.Conv2D(filters=64, kernel_size=(7, 7),
     #                          padding='same',
     #                          strides=(2, 2),
@@ -24,6 +24,6 @@ def resnet50():
     # Z = projection_block(Z, [64, 64, 256], 1)
     # Z = identity_block(Z, [64, 64, 256])
     # Z = identity_block(Z, [64, 64, 256])
-    return K.applications.ResNet50(
+    return K.applications.ResNet50(weights=init,
         input_tensor=X, input_shape=(
             224, 224, 3), pooling='max')
