@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-import tensorflow.keras as K
 """5. Dense Block"""
+import tensorflow.keras as K
 
 
 def dense_block(X, nb_filters, growth_rate, layers):
     """ function  that builds a dense block as described
     in Densely Connected Convolutional Networks"""
     for i in range(layers):
+        # each_layer = conv_layer(X, growth_rate)
         conv_x = K.layers.BatchNormalization()(X)
         conv_x = K.layers.Activation('relu')(conv_x)
         conv_x = K.layers.Conv2D(
@@ -17,13 +18,13 @@ def dense_block(X, nb_filters, growth_rate, layers):
             padding='same')(conv_x)
         conv_x = K.layers.BatchNormalization()(conv_x)
         conv_x = K.layers.Activation('relu')(conv_x)
-        conv_x = K.layers.Conv2D(
+        each_layer = K.layers.Conv2D(
             growth_rate,
             (3,
              3),
             kernel_initializer='he_normal',
             padding='same')(conv_x)
-        X = K.layers.concatenate([X, conv_x])
+        X = K.layers.concatenate([X, each_layer])
         nb_filters += growth_rate
 
     return X, nb_filters
