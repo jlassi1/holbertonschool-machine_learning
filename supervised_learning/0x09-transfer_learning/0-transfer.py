@@ -85,8 +85,8 @@ def base_model():
             y_t))
     # Evaluating
     modelLoss, modelAccuracy = model.evaluate(x_t, y_t)
-    print('model Loss is {}'.format(modelLoss))
-    print('model Accuracy is {}'.format(modelAccuracy))
+    print('model Loss for the validation data is {}'.format(modelLoss))
+    print('model Accuracy for the validation data is {}'.format(modelAccuracy))
     # save the model with name cifar10.h5
     model.save("cifar10.h5")
 
