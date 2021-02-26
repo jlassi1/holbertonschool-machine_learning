@@ -46,12 +46,16 @@ class Yolo:
             by = (self.sigmoid(t_y) + cy) / gr_h
             bw = (np.exp(t_w) * p_w) / self.model.input.shape[1].value
             bh = (np.exp(t_h) * p_h) / self.model.input.shape[2].value
-            x1 = bx - bw / 2
-            y1 = by - bh / 2
-            x2 = x1 + bw
-            y2 = y1 + bh
-            box[..., 0] = x1 * img_w
-            box[..., 1] = y1 * img_h
-            box[..., 2] = x2 * img_w
-            box[..., 3] = y2 * img_h
+            # x1 = bx - bw / 2
+            # y1 = by - bh / 2
+            # x2 = x1 + bw
+            # y2 = y1 + bh
+            top_left_x = bx - bw / 2
+            top_left_y = by - bh / 2
+            bottom_right_x = bx + bw / 2
+            bottom_right_y = by + bh / 2
+            box[..., 0] = top_left_x * img_w
+            box[..., 1] = top_left_y * img_h
+            box[..., 2] = bottom_right_x * img_w
+            box[..., 3] = bottom_right_y * img_h
         return boxes, box_confidences, box_class_probs
