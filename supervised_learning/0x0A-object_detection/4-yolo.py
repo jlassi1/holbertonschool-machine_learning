@@ -85,6 +85,5 @@ class Yolo:
         images = []
         image_paths = glob.glob(folder_path + '/*')
         for img in image_paths:
-            image = cv2.imread(img, 1)
-            images.append(image)
-        return (images, image_paths)
+            images.append(cv2.imread(img, 3))
+        return images, image_paths
