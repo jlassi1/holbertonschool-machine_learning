@@ -30,8 +30,8 @@ class Yolo:
 
         for output in outputs:
             boxes.append(output[..., 0:4])
-            box_confidences.append(self.sigmoid(output[..., 4]))
-            # print(box_confidences)
+            box_confidences.append(self.sigmoid(output[..., 4, np.newaxis]))
+            print(box_confidences)
             box_class_probs.append(self.sigmoid(output[..., 5:]))
             # print(box_class_probs)
         for i, boxs in enumerate(boxes):
