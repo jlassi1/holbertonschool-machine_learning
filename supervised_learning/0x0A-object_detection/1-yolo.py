@@ -32,26 +32,26 @@ class Yolo:
             boxes.append(output[..., 0:4])
             box_confidences.append(self.sigmoid(output[..., 4, np.newaxis]))
             box_class_probs.append(self.sigmoid(output[..., 5:]))
-        for i, boxs in enumerate(boxes):
-            gr_h, gr_w, anchors_boxes, _ = boxs.shape
+        for i, box in enumerate(boxes):
+            gr_h, gr_w, anchors_boxes, _ = box.shape
             cx = np.indices((gr_h, gr_w, anchors_boxes))[1]
             cy = np.indices((gr_h, gr_w, anchors_boxes))[0]
-            t_x = boxs[..., 0]
-            t_y = boxs[..., 1]
-            t_w = boxs[..., 2]
-            t_h = boxs[..., 3]
+            t_x = box[..., 0]
+            t_y = box[..., 1]
+            t_w = box[..., 2]
+            t_h = box[..., 3]
             p_w = self.anchors[i, :, 0]
             p_h = self.anchors[i, :, 1]
             bx = (self.sigmoid(t_x) + cx) / gr_w
             by = (self.sigmoid(t_y) + cy) / gr_h
-            bw = (np.exp(t_w) * p_w) / self.model.input.shape[1].value
+            bw = (np.exp(t_w) * p_w) / self.model.input.shape[0].value
             bh = (np.exp(t_h) * p_h) / self.model.input.shape[1].value
             x1 = bx - bw / 2
             y1 = by - bh / 2
             x2 = x1 + bw
             y2 = y1 + bh
-            boxs[..., 0] = x1 * img_w
-            boxs[..., 1] = y1 * img_h
-            boxs[..., 2] = x2 * img_w
-            boxs[..., 3] = y2 * img_h
+            box[..., 0] = x1 * img_w
+            box[..., 1] = y1 * img_h
+            box[..., 2] = x2 * img_w
+            box[..., 3] = y2 * img_h
         return boxes, box_confidences, box_class_probs
