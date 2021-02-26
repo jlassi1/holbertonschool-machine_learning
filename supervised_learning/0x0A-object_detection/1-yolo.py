@@ -12,7 +12,6 @@ class Yolo:
         self.model = K.models.load_model(model_path)
         with open(classes_path, 'r') as f:
             self.class_names = [line[:-1] for line in f]
-
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
@@ -22,7 +21,8 @@ class Yolo:
         return (1 / (1 + np.exp(-z)))
 
     def process_outputs(self, outputs, image_size):
-        """  """
+        """function that process the output and return a tuple of
+        (boxes, box_confidences, box_class_probs)  """
         boxes = []
         box_confidences = []
         box_class_probs = []
@@ -31,15 +31,11 @@ class Yolo:
         for output in outputs:
             boxes.append(output[..., 0:4])
             box_confidences.append(self.sigmoid(output[..., 4, np.newaxis]))
-            print(box_confidences)
             box_class_probs.append(self.sigmoid(output[..., 5:]))
-            # print(box_class_probs)
         for i, boxs in enumerate(boxes):
             gr_h, gr_w, anchors_boxes, _ = boxs.shape
             cx = np.indices((gr_h, gr_w, anchors_boxes))[1]
-            # print(cx)
             cy = np.indices((gr_h, gr_w, anchors_boxes))[0]
-            # print(cy)
             t_x = boxs[..., 0]
             t_y = boxs[..., 1]
             t_w = boxs[..., 2]
