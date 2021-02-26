@@ -44,8 +44,8 @@ class Yolo:
             p_h = self.anchors[i, :, 1]
             bx = (self.sigmoid(t_x) + cx) / gr_w
             by = (self.sigmoid(t_y) + cy) / gr_h
-            bw = (np.exp(t_w) * p_w) / self.model.input.shape[0].value
-            bh = (np.exp(t_h) * p_h) / self.model.input.shape[1].value
+            bw = (np.exp(t_w) * p_w) / self.model.input.shape[1].value
+            bh = (np.exp(t_h) * p_h) / self.model.input.shape[2].value
             x1 = bx - bw / 2
             y1 = by - bh / 2
             x2 = x1 + bw
