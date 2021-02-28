@@ -62,18 +62,29 @@ class Yolo:
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         """ Filter YOLO boxes based on object and class confidence."""
-        # box_scores = [box_confidences[i] * box_class_probs[i]
-        # for i in range(len(box_confidences))]
-        # box_classes = K.backend.argmax(box_scores, axis=-1)
-        # box_class_scores = K.max(box_scores, axis=-1, keepdims=False)
-        # prediction_mask = box_class_scores >= self.class_t
+        box_scores = [box_confidences[i] * box_class_probs[i]
+                      for i in range(len(box_confidences))]
+        box_classes = [np.argmax(box_class, axis=-1)
+                       for box_class in box_scores]
+        box_class_scores = [np.max(box_scr, axis=-1) for box_scr in box_scores]
+        prediction_mask = [np.where(bcs >= self.class_t)
+                           for bcs in box_class_scores]
 
-        # # TODO: Expose tf.boolean_mask to Keras backend?
+        boxes = [box[mask] for box, mask in zip(boxes, prediction_mask)]
+        scores = [box[mask] for box, mask in zip(
+            box_class_scores,
+            prediction_mask)]
+        classes = [box[mask]
+                   for box, mask in zip(box_classes, prediction_mask)]
+
         # boxes = tf.boolean_mask(boxes, prediction_mask)
         # scores = tf.boolean_mask(box_class_scores, prediction_mask)
         # classes = tf.boolean_mask(box_classes, prediction_mask)
 
-        # return boxes, scores, classes
+        classes = np.concatenate(classes).reshape(-1)
+        boxess = np.concatenate(boxes)
+        scores = np.concatenate(scores).reshape(-1)
+        return boxess, classes, scores
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         """Performs non-max suppression separately for each class. """
