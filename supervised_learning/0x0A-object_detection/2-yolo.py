@@ -67,8 +67,19 @@ class Yolo:
         box_class_scores = [np.max(box_scr, axis=-1) for box_scr in box_scores]
         prediction_mask = [np.where(bcs >= self.class_t)
                            for bcs in box_class_scores]
-        boxes = tf.boolean_mask(boxes, prediction_mask)
-        scores = tf.boolean_mask(box_class_scores, prediction_mask)
-        classes = tf.boolean_mask(box_classes, prediction_mask)
 
-        return boxes, classes, scores
+        boxes = [box[mask] for box, mask in zip(boxes, prediction_mask)]
+        scores = [box[mask] for box, mask in zip(
+            box_class_scores,
+            prediction_mask)]
+        classes = [box[mask]
+                   for box, mask in zip(box_classes, prediction_mask)]
+
+        # boxes = tf.boolean_mask(boxes, prediction_mask)
+        # scores = tf.boolean_mask(box_class_scores, prediction_mask)
+        # classes = tf.boolean_mask(box_classes, prediction_mask)
+
+        classes = np.concatenate(classes).reshape(-1)
+        boxess = np.concatenate(boxes)
+        scores = np.concatenate(scores).reshape(-1)
+        return boxess, classes, scores
