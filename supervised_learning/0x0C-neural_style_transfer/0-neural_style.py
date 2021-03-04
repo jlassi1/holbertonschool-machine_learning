@@ -47,12 +47,12 @@ class NST:
                 'image must be a numpy.ndarray with shape (h, w, 3)')
         largers = max(image.shape[0], image.shape[1])
         coeff = 512 / largers
-        h_new = int(np.floor(image.shape[0] * coeff))
-        w_new = int(np.floor(image.shape[1] * coeff))
-        # print(h_new, w_new)
+        h_new = int(image.shape[0] * coeff)
+        w_new = int(image.shape[1] * coeff)
+
         image = np.expand_dims(image, axis=0)
         image = tf.image.resize_bicubic(image, (h_new, w_new))
-        # print(image)
+
         image = tf.clip_by_value(image / 255, 0, 1)
-        # print(image)
+
         return tf.cast(image, tf.float32)
