@@ -50,9 +50,9 @@ class NST:
         h_new = int(image.shape[0] * coeff)
         w_new = int(image.shape[1] * coeff)
 
-        image = np.expand_dims(image, axis=0)
+        image = tf.expand_dims(image, axis=0)
         image = tf.image.resize_bicubic(image, (h_new, w_new))
 
         image = tf.clip_by_value(image / 255, 0, 1)
 
-        return tf.cast(image, tf.float32)
+        return image
