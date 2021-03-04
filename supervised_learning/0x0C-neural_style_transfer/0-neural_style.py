@@ -21,8 +21,8 @@ class NST:
             raise TypeError(
                 'style_image must be a numpy.ndarray with shape (h, w, 3)')
         if (not isinstance(content_image, np.ndarray)
-                or len(content_image.shape) != 3
-                or content_image.shape[2] != 3):
+                or len(content_image.shape) is not 3
+                or content_image.shape[2] is not 3):
             raise TypeError(
                 'content_image must be a numpy.ndarray with shape (h, w, 3)')
 
@@ -41,8 +41,8 @@ class NST:
         """function that rescales an image such that its pixels values
         are between 0 and 1 and its largest side is 512 pixels"""
         if (not isinstance(image, np.ndarray)
-            or len(image.shape) != 3
-                or image.shape[2] != 3):
+            or len(image.shape) is not 3
+                or image.shape[2] is not 3):
             raise TypeError(
                 'image must be a numpy.ndarray with shape (h, w, 3)')
         largers = max(image.shape[0], image.shape[1])
