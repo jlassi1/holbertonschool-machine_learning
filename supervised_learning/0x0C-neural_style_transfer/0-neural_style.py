@@ -12,6 +12,7 @@ class NST:
                     'block5_conv1']
 
     content_layer = 'block5_conv2'
+    tf.enable_eager_execution()
 
     def __init__(self, style_image, content_image, alpha=1e4, beta=1):
         """ initialization of parameters """
@@ -30,7 +31,6 @@ class NST:
             raise TypeError('alpha must be a non-negative number')
         if beta < 0:
             raise TypeError('beta must be a non-negative number')
-        tf.enable_eager_execution()
         self.content_image = self.scale_image(content_image)
         self.style_image = self.scale_image(style_image)
         self.alpha = alpha
