@@ -55,4 +55,4 @@ class NST:
         # print(image)
         image = tf.clip_by_value(image / 255, 0, 1)
         # print(image)
-        return image
+        return tf.cast(image, tf.float32)
