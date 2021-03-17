@@ -5,9 +5,9 @@ import copy
 
 def determinant(matrix):
     """function that calculates the determinant of a matrix"""
-    if not isinstance(matrix, list) and not isinstance(matrix[0], list):
+    if not isinstance(matrix, list) or matrix == []:
         raise TypeError('matrix must be a list of lists')
-    if not all(isinstance(i, list) for i in matrix):
+    if all(not isinstance(i, list) for i in matrix):
         raise TypeError('matrix must be a list of lists')
     if matrix == [[]]:
         return 1
