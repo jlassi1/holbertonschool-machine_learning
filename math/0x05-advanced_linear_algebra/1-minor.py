@@ -23,7 +23,7 @@ def determinant(matrix):
         x.pop(0)
         for m in range(n - 1):
             x[m].pop(i)
-        det += matrix[0][i] * determinant(x)
+        det += ((-1)**i) * matrix[0][i] * determinant(x)
     return det
 
 
