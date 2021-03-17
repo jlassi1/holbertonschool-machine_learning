@@ -8,11 +8,9 @@ def determinant(matrix):
         raise TypeError('matrix must be a list of lists')
     if not all(isinstance(i, list) for i in matrix):
         raise TypeError('matrix must be a list of lists')
-    if matrix == [[]]:
+    if matrix == [[]] or len(matrix[0]) == 0:
         return 1
-    if len(matrix) == 1 and len(matrix[0]) == 0:
-        return 1
-    if len(matrix) == 1 and len(matrix[0]) == 1:
+    if len(matrix[0]) == 1:
         return matrix[0][0]
     if len(matrix) != len(matrix[0]):
         raise ValueError('matrix must be a square matrix')
