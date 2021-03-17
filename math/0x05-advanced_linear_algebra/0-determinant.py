@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ 0. Determinant  """
-import copy
 
 
 def determinant(matrix):
