@@ -38,7 +38,7 @@ def cofactor(matrix):
     if len(matrix[0]) == 1 or matrix == [[]] or len(matrix[0]) == 0:
         return [[1]]
     if len(matrix) == 2:
-        return [[matrix[1][1], matrix[1][0]], [matrix[0][1], matrix[0][0]]]
+        return [[matrix[1][1], -matrix[1][0]], [-matrix[0][1], matrix[0][0]]]
     mi = []
     n = len(matrix)
     y = 0
@@ -49,7 +49,7 @@ def cofactor(matrix):
             x.pop(j)
             for m in range(n - 1):
                 x[m].pop(i)
-            y = (-1)**(i + j) * determinant(x)
+            y = ((-1)**(i + j)) * determinant(x)
             r.append(y)
         mi.append(list(r))
     return mi
