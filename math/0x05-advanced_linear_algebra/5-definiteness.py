@@ -25,7 +25,7 @@ def definiteness(matrix):
             return definitess[3]
         elif all(w <= 0):
             return definitess[2]
-
-        return definitess[4]
+        else:
+            return definitess[4]
     except Exception:
         return None
