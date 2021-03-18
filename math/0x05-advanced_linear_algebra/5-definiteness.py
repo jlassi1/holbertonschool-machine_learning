@@ -16,16 +16,16 @@ def definiteness(matrix):
     if matrix.size == 0 or matrix.shape[0] != matrix.shape[1]:
         return None
     try:
-        w = np.linalg.eig(matrix)[0]
+        w, v = np.linalg.eig(matrix)
         if all(w > 0):
             return definitess[0]
-        if all(w >= 0):
+        elif all(w >= 0):
             return definitess[1]
         if all(w < 0):
             return definitess[3]
-        if all(w <= 0):
+        elif all(w <= 0):
             return definitess[2]
-        else:
-            return definitess[4]
+
+        return definitess[4]
     except Exception:
         return None
