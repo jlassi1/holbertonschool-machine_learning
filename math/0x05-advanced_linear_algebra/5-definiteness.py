@@ -13,7 +13,7 @@ def definiteness(matrix):
         'Indefinite']
     if not isinstance(matrix, np.ndarray):
         raise TypeError('matrix must be a numpy.ndarray')
-    if matrix.size == 0 or matrix.shape[0] != matrix.shape[1]:
+    if not np.array_equal(matrix.T, matrix):
         return None
     try:
         w, v = np.linalg.eig(matrix)
