@@ -16,7 +16,7 @@ def definiteness(matrix):
     if matrix.size == 0 or matrix.ndim == 0 or matrix.shape[0] != matrix.shape[1]:
         return None
     try:
-        w, v = np.linalg.eig(matrix)
+        w = np.linalg.eig(matrix)[0]
         if all(w > 0):
             return definitess[0]
         if all(w >= 0):
