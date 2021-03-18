@@ -8,15 +8,13 @@ def determinant(matrix):
         raise TypeError('matrix must be a list of lists')
     if any(not isinstance(i, list) for i in matrix):
         raise TypeError('matrix must be a list of lists')
-    if matrix == [[]]:
+    if matrix == [[]] or len(matrix[0]) == 0:
         return 1
-    if any(len(i) != len(matrix) for i in matrix):
-        raise ValueError('matrix must be a square matrix')
-    n = len(matrix)
-    if n == 1:
+    if len(matrix[0]) == 1:
         return matrix[0][0]
-    # calculate the determinant of 2x2 matrix
-    if n == 2:
+    if len(matrix) != len(matrix[0]):
+        raise ValueError('matrix must be a square matrix')
+    if len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
     det = 0
     n = len(matrix)
