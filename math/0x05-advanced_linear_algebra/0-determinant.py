@@ -12,7 +12,7 @@ def determinant(matrix):
         return 1
     if len(matrix[0]) == 1:
         return matrix[0][0]
-    if len(matrix) != len(matrix[0]):
+    if any(len(i) != len(matrix) for i in matrix):
         raise ValueError('matrix must be a square matrix')
     if len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
