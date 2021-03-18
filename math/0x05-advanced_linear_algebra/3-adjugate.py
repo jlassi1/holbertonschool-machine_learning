@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 2. Cofactor  """
+""" 3. Adjugate  """
 
 
 def determinant(matrix):
