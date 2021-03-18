@@ -69,6 +69,6 @@ def inverse(matrix):
         return None
     x = 1 / determinant(matrix)
 
-    m = [[x * adj[i][j] for j in range(len(matrix[0]))]
+    m = [[adj[i][j] * x for j in range(len(matrix[0]))]
          for i in range(len(matrix))]
     return m
