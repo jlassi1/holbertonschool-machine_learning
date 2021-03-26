@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 0. Likelihood """
+""" 2. Marginal Probability  """
 import numpy as np
 
 
