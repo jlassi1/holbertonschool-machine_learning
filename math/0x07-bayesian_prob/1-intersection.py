@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 0. Likelihood """
+"""1. Intersection  """
 import numpy as np
 
 
