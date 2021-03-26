@@ -20,6 +20,6 @@ def likelihood(x, n, P):
         raise ValueError('All values in P must be in the range [0, 1]')
     fact = np.math.factorial(n) / (np.math.factorial(x)
                                    * np.math.factorial(n - x))
-    likhd = fact * (P ** x) * ((1 - P) ** (n - x))
+    likhd = fact * (P ** x) * (nppowr((1 - P), (n - x)))
 
     return likhd
