@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 0. Likelihood """
+""" 3. Posterior """
 import numpy as np
 
 
