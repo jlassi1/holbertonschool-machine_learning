@@ -7,7 +7,7 @@ def likelihood(x, n, P):
     """function that calculates the likelihood of obtaining
     this data given various hypothetical probabilities
     of developing severe side effects"""
-    if not isinstance(n, int) or n <= 0:
+    if not isinstance(n, int) or n < 0:
         raise ValueError('n must be a positive integer')
     if not isinstance(x, int) or x < 0:
         raise ValueError('x must be an integer \
