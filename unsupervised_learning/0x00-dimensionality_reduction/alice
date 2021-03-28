@@ -1,5 +1,0 @@
-for file in ./*.py
-do
-    echo "#!/usr/bin/env python3" >> "$file"
-    chmod +x "$file"
-done
