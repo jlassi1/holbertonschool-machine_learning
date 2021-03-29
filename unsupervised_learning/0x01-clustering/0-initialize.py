@@ -5,12 +5,12 @@ import numpy as np
 
 def initialize(X, k):
     """function that initializes cluster centroids for K-mean"""
-    if not isinstance(k, int) or k <= 0:
-        return None
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None
-    n, d = X.shape
+    # if not isinstance(k, int) or k <= 0:
+    #     return None
+    # if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    #     return None
     try:
+        n, d = X.shape
         points = np.random.uniform(
             low=np.min(X, axis=0), high=np.max(X, axis=0), size=(k, d))
     except Exception:
