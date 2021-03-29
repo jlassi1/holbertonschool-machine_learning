@@ -13,6 +13,6 @@ def initialize(X, k):
     try:
         points = np.random.uniform(
             low=np.min(X, axis=0), high=np.max(X, axis=0), size=(k, d))
-        return points
     except Exception:
         return None
+    return points
