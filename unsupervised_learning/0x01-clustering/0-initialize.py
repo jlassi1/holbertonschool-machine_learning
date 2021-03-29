@@ -6,9 +6,9 @@ import numpy as np
 def initialize(X, k):
     """function that initializes cluster centroids for K-mean"""
     n, d = X.shape
-    if not isinstance(k, int) or k < 0:
+    if not isinstance(k, int) or k <= 0:
         return None
-    if not isinstance(X, np.ndarray):
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
     try:
         points = np.random.uniform(
