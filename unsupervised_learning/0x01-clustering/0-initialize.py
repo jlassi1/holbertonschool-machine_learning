@@ -8,6 +8,8 @@ def initialize(X, k):
     n, d = X.shape
     if not isinstance(k, int) or k < 0:
         return None
+    if not isinstance(X, np.ndarray):
+        return None
     try:
         points = np.random.uniform(
             low=np.min(X, axis=0), high=np.max(X, axis=0), size=(k, d))
