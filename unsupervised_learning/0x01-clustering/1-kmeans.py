@@ -33,16 +33,16 @@ def kmeans(X, k, iterations=1000):
     centroids = initialize(X, k)
     if centroids is None:
         return None, None
-    closest = np.argmin(dist(X, centroids), axis=1)
+    closest_idx = np.argmin(dist(X, centroids), axis=1)
     for i in range(iterations):
         cp = centroids.copy()
         for j in range(k):
-            if X[np.where(closest == j)].size == 0:
+            if X[np.where(closest_idx == j)].size == 0:
                 centroids[j] = initialize(X, 1)
             else:
-                centroids[j] = X[np.where(closest == j)].mean(axis=0)
-        closest = np.argmin(dist(X, centroids), axis=1)
+                centroids[j] = X[np.where(closest_idx == j)].mean(axis=0)
+        closest_idx = np.argmin(dist(X, centroids), axis=1)
         if np.array_equal(cp, centroids):
             break
 
-    return centroids, closest
+    return centroids, closest_idx
