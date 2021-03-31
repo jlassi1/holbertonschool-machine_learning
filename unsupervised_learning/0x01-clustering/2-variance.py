@@ -5,8 +5,8 @@ import numpy as np
 
 def dist(data, centers):
     """function that calcules the distant between centre and data"""
-    distance = np.sqrt(np.sum(
-        (np.array(centers) - data[:, None, :])**2, axis=2))
+    distance = np.linalg.norm(
+        (np.array(centers) - data[:, None, :]), axis=2)
     return distance
 
 
