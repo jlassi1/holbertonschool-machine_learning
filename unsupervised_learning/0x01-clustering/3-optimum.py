@@ -9,6 +9,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     """function that tests for the optimum number of clusters by variance"""
     if not isinstance(kmin, int) or kmin < 1:
         return None, None
+    if kmax is None:
+        kmax = X.shape[0]
     if not isinstance(kmax, int) or kmax < kmin - 1:
         return None, None
     try:
