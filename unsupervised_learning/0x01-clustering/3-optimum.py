@@ -14,10 +14,10 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     try:
         results = []
         d_vars = []
-        c1, clss1 = kmeans(X, kmin, iterations)
-        var_min = variance(X, c1)
         for k in range(kmin, kmax + 1):
             C, clss = kmeans(X, k, iterations)
+            if k == kmin:
+                var_min = variance(X, C)
             results.append((C, clss))
             var = variance(X, C)
             d_vars.append(var_min - var)
