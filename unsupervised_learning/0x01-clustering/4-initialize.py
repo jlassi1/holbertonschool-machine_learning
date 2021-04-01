@@ -6,8 +6,6 @@ kmeans = __import__('1-kmeans').kmeans
 
 def initialize(X, k):
     """function that initializes variables for a Gaussian Mixture Model"""
-    # if not isinstance(k, int) or k < 1:
-    #     return None, None, None
     try:
         # centroid means for each cluster, initialized with K-means
         C, clss = kmeans(X, k)
