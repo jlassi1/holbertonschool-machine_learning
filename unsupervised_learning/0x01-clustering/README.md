@@ -1,6 +1,11 @@
 # 0x01-clustering
 
-## Learning Objectives
+## 
+    for i, point in enumerate(points):
+        points[i] += random.choice(centers)
+    return points
+
+Learning Objectives
 
     What is a multimodal distribution?
     What is a cluster?
