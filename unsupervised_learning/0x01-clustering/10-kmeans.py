@@ -2,8 +2,6 @@
 """10. Hello, sklearn! """
 import sklearn.cluster
 
-# whyyyyy
-
 
 def kmeans(X, k):
     """function that performs K-means on a dataset"""
