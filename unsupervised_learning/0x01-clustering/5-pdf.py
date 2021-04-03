@@ -23,7 +23,7 @@ def pdf(X, m, S):
         z = np.exp(-0.5*np.dot(np.dot(diff.T, np.linalg.inv(S)), diff)
                    ).diagonal()
         P = z/y
-        PDF = np.where(P < 1e-300, 1e-300, P)
+        PDF = np.where(P <= 1e-300, 1e-300, P)
         return PDF
     except Exception:
         return None
