@@ -10,8 +10,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     if not isinstance(kmin, int) or kmin < 1:
         return None, None
     if kmax is None:
-        kmax = X.shape[1]
-    elif not isinstance(kmax, int) or kmax <= 0 or kmin >= kmax:
+        kmax = X.shape[0]
+    if not isinstance(kmax, int) or kmax <= 0 or kmin >= kmax:
         return None, None
     try:
         results = []
