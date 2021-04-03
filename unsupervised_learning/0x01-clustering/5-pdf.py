@@ -10,12 +10,12 @@ def pdf(X, m, S):
             or isinstance(m, np.ndarray)
             or isinstance(S, np.ndarray)):
         return None
-    if X.ndim != 2:
+    if len(X.shape) != 2:
         return None
     d = X.shape[1]
-    if m.ndim != 1 or m.shape != (d,):
+    if len(m.shape) != 1 or m.shape != (d,):
         return None
-    if S.ndim != 2 or S.shape != (d, d):
+    if len(S.shape) != 2 or S.shape != (d, d):
         return None
     try:
         y = np.sqrt((2*np.pi)**(d)*np.linalg.det(S))
