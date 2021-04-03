@@ -7,9 +7,9 @@ variance = __import__('2-variance').variance
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     """function that tests for the optimum number of clusters by variance"""
-    if not isinstance(kmin, int) or kmin < 1 or kmin >= kmax:
+    if not isinstance(kmin, int) or kmin < 1:
         return None, None
-    if not isinstance(kmax, int) or kmax <= 0:
+    if not isinstance(kmax, int) or kmax <= 0 or kmin >= kmax:
         return None, None
     try:
         results = []
