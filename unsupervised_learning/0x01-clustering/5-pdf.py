@@ -17,11 +17,13 @@ def pdf(X, m, S):
         return None
     if S.ndim != 2 or S.shape != (d, d):
         return None
-
-    y = np.sqrt((2*np.pi)**(d)*np.linalg.det(S))
-    diff = (X - m).T
-    z = np.exp(-0.5*np.dot(np.dot(diff.T, np.linalg.inv(S)), diff)
-               ).diagonal()
-    P = z/y
-    PDF = np.where(P < 1e-300, 1e-300, P)
-    return PDF
+    try:
+        y = np.sqrt((2*np.pi)**(d)*np.linalg.det(S))
+        diff = (X - m).T
+        z = np.exp(-0.5*np.dot(np.dot(diff.T, np.linalg.inv(S)), diff)
+                   ).diagonal()
+        P = z/y
+        PDF = np.where(P < 1e-300, 1e-300, P)
+        return PDF
+    except Exception:
+        return None
