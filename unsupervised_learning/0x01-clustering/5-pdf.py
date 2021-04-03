@@ -18,7 +18,7 @@ def pdf(X, m, S):
     if len(S.shape) != 2 or S.shape != (d, d):
         return None
     try:
-        y = np.sqrt((2*np.pi)**(d)*np.linalg.det(S))
+        y = ((2 * np.pi) ** (d / 2) * np.linalg.det(S) ** 0.5)
         diff = (X - m).T
         z = np.exp(-0.5*np.dot(np.dot(diff.T, np.linalg.inv(S)), diff)
                    ).diagonal()
