@@ -19,11 +19,11 @@ def pdf(X, m, S):
         return None
     try:
         y = ((2 * np.pi) ** (d / 2) * np.linalg.det(S) ** 0.5)
-        diff = (X - m)
+        diff = (X - m).T
         z = np.exp(-0.5*np.dot(
-            np.dot(diff, np.linalg.inv(S)), diff.T).diagonal())
+            np.dot(diff.T, np.linalg.inv(S)), diff).diagonal())
         P = z/y
-        PDF = np.where(P <= 1e-300, 1e-300, P)
+        PDF = np.where(P < 1e-300, 1e-300, P)
         return PDF
     except Exception:
         return None
