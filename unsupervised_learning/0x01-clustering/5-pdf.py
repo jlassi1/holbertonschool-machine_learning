@@ -19,9 +19,9 @@ def pdf(X, m, S):
         return None
     try:
         y = ((2 * np.pi) ** (d / 2) * np.linalg.det(S) ** 0.5)
-        diff = (X - m).T
+        diff = (X - m)
         z = np.exp(-0.5*np.dot(
-            np.dot(diff.T, np.linalg.inv(S)), diff).diagonal())
+            np.dot(diff, np.linalg.inv(S)), diff.T).diagonal())
         P = z/y
         PDF = np.where(P <= 1e-300, 1e-300, P)
         return PDF
