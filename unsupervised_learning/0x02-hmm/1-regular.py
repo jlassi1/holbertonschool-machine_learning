@@ -10,6 +10,8 @@ def regular(P):
         return None
     if (P == np.eye(P.shape[0])).any():
         return None
+    if np.linalg.det(P) == 0:
+        return None
     try:
         n = P.shape[0]
         q = (P-np.eye(n))
