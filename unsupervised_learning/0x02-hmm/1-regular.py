@@ -18,7 +18,9 @@ def regular(P):
         ones = np.ones(n)
         q = np.c_[q, ones]
         QTQ = np.dot(q, q.T)
-        bQT = np.ones(n)
-        return np.linalg.solve(QTQ, bQT)
+        # print(QTQ.shape)
+        bQT = np.ones((n, 1))
+        # print(bQT.shape)
+        return np.linalg.solve(QTQ, bQT).T
     except Exception:
         return None
