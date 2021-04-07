@@ -7,8 +7,6 @@ def absorbing(P):
     """function that determines if a markov chain is absorbing"""
     try:
         n = P.shape[0]
-        if (P == np.eye(n)).all():
-            return True
         diag = np.where(np.diag(P) == 1, 1, 0)
         if not np.any(diag == 1):
             return False
