@@ -14,11 +14,8 @@ def absorbing(P):
             return False
 
         d, v = np.linalg.eig(P)
-        # print( np.diag(d == 1).astype(int))
-        # print(np.linalg.inv(v))
         P_bar = v @ np.diag(d == 1).astype(int) @ np.linalg.inv(v)
-        # print(v @ np.diag(d >= 1).astype(int) @ np.linalg.inv(v) )
-        # print(int(np.ceil(np.max(P_bar.sum()))))
+
         if int(np.ceil(np.max(P_bar.sum()))) != n:
             return False
         return True
