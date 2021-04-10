@@ -9,7 +9,6 @@ def backward(Observation, Emission, Transition, Initial):
         T = Observation.shape[0]
         N, _ = Emission.shape
         Beta = np.ones((N, T))
-        # Beta[:, T - 1] = 1
 
         for t in range(T - 2, -1, -1):
             for s in range(N):
