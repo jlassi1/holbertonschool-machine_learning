@@ -33,10 +33,9 @@ class GaussianProcess:
         # Compute kernel(X_s, X_s).
         Kss = self.kernel(X_s, X_s)
         # Compute posterior mean k(X_star, X) (k(X, X) + Σ)⁻¹ Y.
-        mean = np.matmul(
-            np.matmul(Ksx, K_inv), self.Y).reshape((X_s.shape[0],))
+        mu = np.matmul(np.matmul(Ksx, K_inv), self.Y).reshape((X_s.shape[0],))
         # Compute posterior covariance:
         # k(X_star, X_star) - k(X_star, X) (k(X, X) + Σ)⁻¹ k(X_star, X)ᵀ
         covariance = Kss - (np.matmul(np.matmul(Ksx, K_inv), Ksx.T))
-        covariance = covariance.diagonal()
-        return mean, covariance
+        sigma = covariance.diagonal()
+        return mu, sigma
