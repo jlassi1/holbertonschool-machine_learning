@@ -32,14 +32,11 @@ class GaussianProcess:
         Ksx = self.kernel(X_s, self.X)
         # Compute kernel(X_s, X_s).
         Kss = self.kernel(X_s, X_s)
-        # print(Kss.shape)
-        # # Solve
-        # # solved = np.linalg.solve(K_inv, Ks).T
-        # solved = Ks @ K_inv
         # Compute posterior mean k(X_star, X) (k(X, X) + Σ)⁻¹ Y.
-        μ2 = np.matmul(np.matmul(Ksx, K_inv), self.Y).reshape((X_s.shape[0],))
+        mean = np.matmul(
+            np.matmul(Ksx, K_inv), self.Y).reshape((X_s.shape[0],))
         # Compute posterior covariance:
         # k(X_star, X_star) - k(X_star, X) (k(X, X) + Σ)⁻¹ k(X_star, X)ᵀ
         covariance = Kss - (np.matmul(np.matmul(Ksx, K_inv), Ksx.T))
         covariance = covariance.diagonal()
-        return μ2, covariance  # mean, covariance
+        return mean, covariance
