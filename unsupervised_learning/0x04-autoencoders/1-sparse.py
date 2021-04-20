@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""0. "Vanilla" Autoencoder """
+"""1. Sparse Autoencoder """
 import numpy as np
 import tensorflow.keras as keras
 
