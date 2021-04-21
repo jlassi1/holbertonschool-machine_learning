@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """2. Convolutional Autoencoder """
-import numpy as np
 import tensorflow.keras as keras
 
 
