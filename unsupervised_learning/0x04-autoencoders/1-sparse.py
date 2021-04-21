@@ -28,7 +28,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
 
     decoder_input = keras.Input(shape=(latent_dims,))
     for i in hidden_layers[::-1]:
-        if i == hidden_layers[1]:
+        if i == hidden_layers[-1]:
             decoded = keras.layers.Dense(
                 i,
                 activation='relu',
