@@ -41,7 +41,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
 
     decoder = keras.Model(decoder_input, decoded)
 
-    auto = keras.Model(input_img, decoder(latent))
+    auto = keras.Model(input_img, decoder(encoder(input_img)))
     auto.compile("Adam", 'binary_crossentropy')
 
     return encoder, decoder, auto
