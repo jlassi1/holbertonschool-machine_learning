@@ -21,8 +21,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
 
     latent = keras.layers.Dense(
         latent_dims,
-        activation='relu',
-        activity_regularizer=keras.regularizers.l1(lambtha))(encoded)
+        activation='relu')(encoded)
 
     encoder = keras.Model(input_img, latent)
 
