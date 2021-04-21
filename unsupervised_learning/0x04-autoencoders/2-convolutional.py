@@ -11,13 +11,11 @@ def autoencoder(input_dims, filters, latent_dims):
         if i == filters[0]:
             encoded = keras.layers.Conv2D(
                 i, (3, 3), activation='relu', padding='same')(input_img)
-            encoded = keras.layers.MaxPooling2D(
-                (2, 2), padding='same')(encoded)
         else:
             encoded = keras.layers.Conv2D(
                 i, (3, 3), activation='relu', padding='same')(encoded)
-            encoded = keras.layers.MaxPooling2D(
-                (2, 2), padding='same')(encoded)
+        encoded = keras.layers.MaxPooling2D(
+            (2, 2), padding='same')(encoded)
 
     encoder = keras.Model(input_img, encoded)
 
@@ -26,7 +24,7 @@ def autoencoder(input_dims, filters, latent_dims):
     decoded = keras.layers.Conv2D(
                 filters[-1], (3, 3),
                 activation='relu', padding='same')(decoder_input)
-    decoded = keras.layers.UpSampling2D((2, 2))(decoded)
+    # decoded = keras.layers.UpSampling2D((2, 2))(decoded)
     for i in filters[::-1]:
         if i == filters[0]:
             decoded = keras.layers.Conv2D(
@@ -35,10 +33,10 @@ def autoencoder(input_dims, filters, latent_dims):
         else:
             decoded = keras.layers.Conv2D(
                 i, (3, 3), activation='relu', padding='same')(decoded)
-            decoded = keras.layers.UpSampling2D((2, 2))(decoded)
+        decoded = keras.layers.UpSampling2D((2, 2))(decoded)
 
     decoded = keras.layers.Conv2D(
-        input_dims[-1], (3, 3), activation='sigmoid')(decoded)
+        input_dims[-1], (3, 3), activation='sigmoid', padding='same')(decoded)
 
     decoder = keras.Model(decoder_input, decoded)
 
