@@ -24,7 +24,8 @@ def autoencoder(input_dims, filters, latent_dims):
     decoder_input = keras.Input(shape=latent_dims)
     # if i == filters[-1]:
     decoded = keras.layers.Conv2D(
-                filters[-1], (3, 3), activation='relu', padding='same')(decoder_input)
+                filters[-1], (3, 3),
+                activation='relu', padding='same')(decoder_input)
     decoded = keras.layers.UpSampling2D((2, 2))(decoded)
     for i in filters[::-1]:
         if i == filters[0]:
