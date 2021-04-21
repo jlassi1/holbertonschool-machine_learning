@@ -6,19 +6,20 @@ import tensorflow.keras as keras
 def autoencoder(input_dims, filters, latent_dims):
     """function that creates a convolutional autoencoder"""
     input_img = keras.Input(shape=input_dims)
-    for i in filters:
-        if i == filters[0]:
+    for i in range(len(filters)):
+        if i == 0:
             encoded = keras.layers.Conv2D(
-                i, (3, 3), activation='relu', padding='same')(input_img)
+                filters[i], (3, 3),
+                activation='relu', padding='same')(input_img)
         else:
             encoded = keras.layers.Conv2D(
-                i, (3, 3), activation='relu', padding='same')(encoded)
+                filters[i], (3, 3), activation='relu', padding='same')(encoded)
         encoded = keras.layers.MaxPooling2D(
             (2, 2), padding='same')(encoded)
 
     encoder = keras.Model(input_img, encoded)
+    decoder_input = keras.Input(shape=latent_dims)
 
-    decoded = keras.Input(shape=latent_dims)
     decoded = keras.layers.Conv2D(
                 filters[-1], (3, 3),
                 activation='relu', padding='same')(decoder_input)
