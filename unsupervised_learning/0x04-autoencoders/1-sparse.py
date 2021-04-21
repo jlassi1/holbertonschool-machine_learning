@@ -11,17 +11,16 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
         if i == hidden_layers[0]:
             encoded = keras.layers.Dense(
                 i,
-                activation='relu',
-                activity_regularizer=keras.regularizers.l1(lambtha))(input_img)
+                activation='relu')(input_img)
         else:
             encoded = keras.layers.Dense(
                 i,
-                activation='relu',
-                activity_regularizer=keras.regularizers.l1(lambtha))(encoded)
+                activation='relu')(encoded)
 
     latent = keras.layers.Dense(
         latent_dims,
-        activation='relu')(encoded)
+        activation='relu',
+        activity_regularizer=keras.regularizers.l1(lambtha))(encoded)
 
     encoder = keras.Model(input_img, latent)
 
