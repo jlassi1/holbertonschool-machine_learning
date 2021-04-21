@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """0. "Vanilla" Autoencoder """
-import numpy as np
 import tensorflow.keras as keras
 
 
