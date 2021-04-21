@@ -19,8 +19,9 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     encoder = keras.Model(input_img, latent)
 
     decoder_input = keras.Input(shape=(latent_dims,))
+    # print(hidden_layers[::-1])
     for i in hidden_layers[::-1]:
-        if i == hidden_layers[1]:
+        if i == hidden_layers[-1]:
             decoded = keras.layers.Dense(i, activation='relu')(decoder_input)
         else:
             decoded = keras.layers.Dense(i, activation='relu')(decoded)
