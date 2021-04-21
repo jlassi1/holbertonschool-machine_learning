@@ -7,7 +7,7 @@ def autoencoder(input_dims, filters, latent_dims):
     """function that creates a convolutional autoencoder"""
     input_img = keras.Input(shape=input_dims)
     for i in filters:
-        if i is filters[0]:
+        if i == filters[0]:
             encoded = keras.layers.Conv2D(
                 i, (3, 3), activation='relu', padding='same')(input_img)
         else:
