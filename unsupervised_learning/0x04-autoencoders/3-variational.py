@@ -30,7 +30,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         latent_dims,))([z_mean, z_log_sigma])
     # z = keras.layers.Lambda(sampling)([z_mean, z_log_sigma])
 
-    encoder = keras.Model(input_img, [z, z_mean, z_log_sigma])
+    encoder = keras.Model(input_img, [z_mean, z_log_sigma, z])
     decoder_input = keras.Input(shape=(latent_dims,))
 
     for i in hidden_layers[::-1]:
@@ -42,7 +42,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
 
     decoder = keras.Model(decoder_input, decoded)
 
-    auto = keras.Model(input_img, decoder(encoder(input_img)[0]))
+    auto = keras.Model(input_img, decoder(encoder(input_img)[2]))
     auto.compile(loss='binary_crossentropy', optimizer='adam')
 
     return encoder, decoder, auto
