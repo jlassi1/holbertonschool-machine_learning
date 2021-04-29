@@ -21,6 +21,7 @@ class GRUCell:
         self.by = np.zeros((1, o))
 
     def softmax(self, x):
+        """Compute softmax values for each sets of scores in x."""
         e_x = np.exp(x - np.max(x))
         return e_x / e_x.sum(axis=1, keepdims=True)
 
