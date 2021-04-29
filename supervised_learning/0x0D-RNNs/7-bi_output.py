@@ -11,7 +11,7 @@ class BidirectionalCell:
         # Weights
         self.Whf = np.random.randn(i + h, h)
         self.Whb = np.random.randn(i + h, h)
-        self.Wy = np.random.randn(2*h, o)
+        self.Wy = np.random.randn(2 * h, o)
 
         # Biases
         self.bhf = np.zeros((1, h))
@@ -50,5 +50,9 @@ class BidirectionalCell:
 
     def output(self, H):
         """function that calculates all outputs for the RNN"""
-        Y = self.softmax(np.matmul(H, self.Wy) + self.by)
+        t, m, h = H.shape
+        o = self.Wy.shape[1]
+        Y = np.empty(shape=(t, m, o))
+        for s in range(t):
+            Y[s, ...] = self.softmax(np.matmul(H[s, ...], self.Wy) + self.by)
         return Y
