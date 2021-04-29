@@ -48,10 +48,6 @@ class BidirectionalCell:
         e_x = np.exp(x - np.max(x))
         return e_x / e_x.sum(axis=1, keepdims=True)
 
-    def sigmoid(self, x):
-        """Compute sigmoid values for each sets of scores in x."""
-        return np.exp(-np.logaddexp(0, -x))
-
     def output(self, H):
         """function that calculates all outputs for the RNN"""
         Y = self.softmax(np.matmul(H, self.Wy) + self.by)
