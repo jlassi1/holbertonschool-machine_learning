@@ -14,10 +14,18 @@ def fasttext_model(
         seed=0,
         workers=1):
     """function that creates and trains a gensim fasttext_model"""
-    model = FastText(sentences=sentences,
-                     window=window, seed=seed, negative=negative,
-                     sg=int(not cbow), vector_size=size, min_count=min_count,
-                     workers=workers, epochs=iterations)
-    token_count = sum([len(sentence) for sentence in sentences])
-    model.train(sentences, total_examples=token_count, epochs=model.epochs)
+    model = FastText(sentences,
+                     size=size,
+                     min_count=min_count,
+                     negative=negative,
+                     window=window,
+                     sg=not cbow,
+                     iter=iterations,
+                     seed=seed,
+                     workers=workers)
+    # model.train(
+    #     sentences,
+    #     total_examples=model.corpus_count,
+    #     epochs=model.epochs)
+
     return model
