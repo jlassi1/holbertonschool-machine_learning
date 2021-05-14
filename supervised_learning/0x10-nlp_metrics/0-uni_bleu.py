@@ -21,13 +21,13 @@ def brevity_penalty(candidate, references):
     r: effective reference length
     """
     c = len(candidate)
-    r = np.argmin(np.abs(len(r) - c) for r in references)
+    r = np.argmin(abs(len(r) - c) for r in references)
     r = len(references[r])
 
     if c > r:
         return 1
     else:
-        return np.exp(1 - r / c)
+        return np.exp(1 - float(r) / c)
 
 
 def count_clip_ngram(sentence, references):
