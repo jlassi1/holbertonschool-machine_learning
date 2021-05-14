@@ -8,8 +8,8 @@ def uni_bleu(references, sentence):
     c = len(sentence)
     bp = brevity_penalty(sentence, references)
     words = count_clip_ngram(sentence, references)
-    p = sum(words.values()) / c
-    return bp * p
+    p = sum(words.values())
+    return bp * p / c
 
 
 def brevity_penalty(candidate, references):
@@ -17,7 +17,6 @@ def brevity_penalty(candidate, references):
     Brevity Penalty
     BP={1 if c>r or exp(1−r/c)if c≤r
     c: length of candidate translation
-
     r: effective reference length
     """
     c = len(candidate)
