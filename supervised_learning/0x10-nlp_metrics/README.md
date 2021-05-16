@@ -8,3 +8,6 @@
     What is a ROUGE score?
     What is perplexity?
     When should you use one evaluation metric over another?
+
+## References
+https://ariepratama.github.io/Introduction-to-BLEU-in-python/#content
