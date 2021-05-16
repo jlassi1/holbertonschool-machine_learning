@@ -6,27 +6,18 @@ import numpy as np
 def uni_bleu(references, sentence):
     """function  that calculates the unigram BLEU score for a sentence"""
     c = len(sentence)
-    bp = brevity_penalty(sentence, references)
+    r = np.argmin(abs(len(r) - c) for r in references)
+    
+    r = len(references[r])
+    if c > r:
+        bp = 1
+    else:
+        bp = np.exp(1 - float(r) / c)
+
     words = count_clip_ngram(sentence, references)
     p = sum(words.values())
     return bp * p / c
 
-
-def brevity_penalty(candidate, references):
-    """
-    Brevity Penalty
-    BP={1 if c>r or exp(1−r/c)if c≤r
-    c: length of candidate translation
-    r: effective reference length
-    """
-    c = len(candidate)
-    r = np.argmin(abs(len(r) - c) for r in references)
-    r = len(references[r])
-
-    if c > r:
-        return 1
-    else:
-        return np.exp(1 - float(r) / c)
 
 
 def count_clip_ngram(sentence, references):
