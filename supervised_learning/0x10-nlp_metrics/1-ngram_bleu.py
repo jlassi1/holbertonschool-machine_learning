@@ -30,7 +30,8 @@ def brevity_penalty(candidate, references):
     r: effective reference length
     """
     c = len(candidate)
-    r = np.argmin(abs(len(r) - c) for r in references)
+    r = np.array([len(r) for r in references])
+    r = np.argmin(np.abs(r - c))
     r = len(references[r])
 
     if c > r:
