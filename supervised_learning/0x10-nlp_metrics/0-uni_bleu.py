@@ -7,7 +7,6 @@ def uni_bleu(references, sentence):
     """function  that calculates the unigram BLEU score for a sentence"""
     c = len(sentence)
     r = np.argmin(abs(len(r) - c) for r in references)
-    
     r = len(references[r])
     if c > r:
         bp = 1
@@ -17,7 +16,6 @@ def uni_bleu(references, sentence):
     words = count_clip_ngram(sentence, references)
     p = sum(words.values())
     return bp * p / c
-
 
 
 def count_clip_ngram(sentence, references):
