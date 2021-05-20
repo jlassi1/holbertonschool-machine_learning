@@ -3,8 +3,6 @@
 import tensorflow as tf
 
 
-
-
 class SelfAttention(tf.keras.layers.Layer):
     """a class from tensorflow.keras that encode for machine translation"""
     def __init__(self, units):
