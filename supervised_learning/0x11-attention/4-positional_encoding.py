@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """  3. Positional Encoding"""
 import numpy as np
-import tensorflow as tf
 
 
 def get_angles(pos, i, d_model):
