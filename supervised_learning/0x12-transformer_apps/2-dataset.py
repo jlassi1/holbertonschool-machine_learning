@@ -44,4 +44,7 @@ class Dataset:
         """acts as a tensorflow wrapper for the encode instance method """
         tf_pt, tf_en = tf.py_function(
             self.encode, inp=[pt, en], Tout=[tf.int64, tf.int64])
+        # tensorflow 2 we didn't need to set the shape. it is automated
+        tf_pt.set_shape([None])
+        tf_en.set_shape([None])
         return tf_pt, tf_en
