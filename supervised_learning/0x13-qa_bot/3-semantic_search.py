@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """  3. Semantic Search  """
-from numpy.lib.function_base import percentile
-import tensorflow as tf
 import tensorflow_hub as hub
 import numpy as np
 import os
