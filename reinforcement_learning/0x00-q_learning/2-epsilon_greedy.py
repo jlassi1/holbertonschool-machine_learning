@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ Epsilon Greedy"""
-import gym
 import numpy as np
 
 
