@@ -9,7 +9,6 @@ def epsilon_greedy(Q, state, epsilon):
     if p < epsilon:
         # Exploration: select random action
         j = np.random.randint(Q.shape[1])
-        print(Q.shape[1])
     else:
         # Exploitation: select the best known action
         j = np.argmax([a for a in Q[state, :]])
