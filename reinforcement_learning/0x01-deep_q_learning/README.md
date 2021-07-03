@@ -12,7 +12,7 @@
 
 # Results
 
-![Alt Text](/home/khawla/ML_project/holbertonschool-machine_learning/reinforcement_learning/0x01-deep_q_learning/1625349469.8946211.gif)
+![Alt Text](https://github.com/jlassi1/holbertonschool-machine_learning/blob/2b72392e922b7192aa5bc661c7efaf44025fdfd8/reinforcement_learning/0x01-deep_q_learning/1625349469.8946211.gif)
 
 
 ## References
