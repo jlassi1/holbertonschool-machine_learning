@@ -12,7 +12,9 @@
 
 # Results
 
-![caption]('/home/khawla/ML_project/holbertonschool-machine_learning/reinforcement_learning/0x01-deep_q_learning/1625349469.8946211.gif')
+[![Demo CountPages alpha](/home/khawla/ML_project/holbertonschool-machine_learning/reinforcement_learning/0x01-deep_q_learning/1625349469.8946211.gif)]
+
+
 ## References
 
 https://colab.research.google.com/github/Hvass-Labs/TensorFlow-Tutorials/blob/master/16_Reinforcement_Learning.ipynb
