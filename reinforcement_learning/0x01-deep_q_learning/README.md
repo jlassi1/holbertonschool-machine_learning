@@ -11,8 +11,11 @@
     What is keras-rl? How do you use it?
 
 # Results
-
+Before train
 ![Alt Text](https://github.com/jlassi1/holbertonschool-machine_learning/blob/2b72392e922b7192aa5bc661c7efaf44025fdfd8/reinforcement_learning/0x01-deep_q_learning/1625349469.8946211.gif)
+
+After train
+![Alt Text](https://github.com/jlassi1/holbertonschool-machine_learning/blob/5d40a059e7ed910dc001eedee9fe3deaeb3ee2a3/reinforcement_learning/0x01-deep_q_learning/1625399276.4668531.gif)
 
 
 ## References
