@@ -13,12 +13,14 @@ def availableShips(passengerCount):
     r = requests.get("https://swapi-api.hbtn.io/api/starships/")
     x = r.json()
     name_ship = []
-    while x['next']:
+    while True:
         for i in x["results"]:
             if i["passengers"].isdigit():
                 if int(i["passengers"]) > passengerCount:
                     name_ship.append(i["name"])
 
+        if x["next"] is None:
+            break
         r = requests.get(x["next"])
         x = r.json()
     return name_ship
