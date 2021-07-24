@@ -5,15 +5,12 @@ What will be next?
 from os import name
 import requests
 from datetime import datetime
-import pandas as pd
 
 
 if __name__ == '__main__':
     url = "https://api.spacexdata.com/v4/launches/upcoming"
 
     r = requests.get(url).json()
-    # dataframe = pd.DataFrame.from_dict(r, orient='columns')
-    # print(dataframe.columns)
 
     information = {'launch name': '', 'date': '', 'rocket id': '',
                    'launchpad id': ''}
