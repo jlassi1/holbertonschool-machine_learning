@@ -15,8 +15,9 @@ def availableShips(passengerCount):
     name_ship = []
     while True:
         for i in x["results"]:
-            if i["passengers"].isdigit():
-                if int(i["passengers"]) > passengerCount:
+            if i["passengers"].isdigit() or "," in i["passengers"]:
+                num = int(i["passengers"].replace(',', ''))
+                if num >= passengerCount:
                     name_ship.append(i["name"])
 
         if x["next"] is None:
