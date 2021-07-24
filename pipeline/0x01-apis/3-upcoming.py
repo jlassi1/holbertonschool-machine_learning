@@ -2,9 +2,7 @@
 """
 What will be next?
 """
-from os import name
 import requests
-from datetime import datetime
 
 
 if __name__ == '__main__':
