@@ -1,7 +1,7 @@
 -- Average score 
 -- script that creates a stored procedure ComputeAverageScoreForUser that computes and store the average score for a student.
+-- DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 
-DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 DELIMITER //
 CREATE Procedure ComputeAverageScoreForUser(IN user_id INT)
     BEGIN
